@@ -1,0 +1,10 @@
+.work/
+*.pyc
+__pycache__/
+.DS_Store
+
+# The quality tools are pinned by tools/qa/package-lock.json, not vendored.
+tools/qa/node_modules/
+tools/qa/lh.json
+# Lighthouse on WSL drops a Windows-style temp profile in its working directory.
+tools/qa/C:*

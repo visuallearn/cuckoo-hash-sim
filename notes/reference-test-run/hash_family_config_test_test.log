@@ -1,0 +1,20 @@
+exec ${PAGER:-/usr/bin/less} "$0" || exit 1
+Executing tests from //pir/hashing:hash_family_config_test
+-----------------------------------------------------------------------------
+Running main() from gmock_main.cc
+[==========] Running 4 tests from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 4 tests from CreateHashFamilyFromConfig
+[ RUN      ] CreateHashFamilyFromConfig.FailsOnUnspecifiedHashFunction
+[       OK ] CreateHashFamilyFromConfig.FailsOnUnspecifiedHashFunction (0 ms)
+[ RUN      ] CreateHashFamilyFromConfig.FailsOnUnknownHashFunction
+[       OK ] CreateHashFamilyFromConfig.FailsOnUnknownHashFunction (0 ms)
+[ RUN      ] CreateHashFamilyFromConfig.FailsOnEmptySeed
+[       OK ] CreateHashFamilyFromConfig.FailsOnEmptySeed (0 ms)
+[ RUN      ] CreateHashFamilyFromConfig.ReturnsSha256HashFunction
+[       OK ] CreateHashFamilyFromConfig.ReturnsSha256HashFunction (0 ms)
+[----------] 4 tests from CreateHashFamilyFromConfig (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 4 tests from 1 test suite ran. (0 ms total)
+[  PASSED  ] 4 tests.

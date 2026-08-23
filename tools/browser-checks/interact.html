@@ -1,0 +1,132 @@
+<!DOCTYPE html><html><head><meta charset="utf-8">
+<title>interaction check</title>
+<style>
+ body{font:13px ui-monospace,monospace;margin:1rem}
+ .ok{color:#2a7}.bad{color:#c33;font-weight:700}
+ #head{font-weight:700;margin-bottom:.5rem}
+ iframe{border:1px solid #ccc;width:1500px;height:1100px}
+</style></head><body>
+<div id="head">running</div>
+<div id="log"></div>
+<iframe id="f" title="site under test"></iframe>
+<script>
+// Drive the real site in an iframe: transport, keyboard, deep links, pickers,
+// route changes, and the subscription bookkeeping behind them. A development
+// aid; never part of the published site.
+const log = document.getElementById('log');
+const f = document.getElementById('f');
+let pass = 0, fail = 0;
+
+function ck(cond, msg) {
+  if (cond) { pass++; log.insertAdjacentHTML('beforeend', `<div class="ok">ok   ${msg}</div>`); }
+  else { fail++; log.insertAdjacentHTML('beforeend', `<div class="bad">FAIL ${msg}</div>`); }
+}
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+async function goto(hash) {
+  f.contentWindow.location.hash = hash;
+  await sleep(700);
+  return f.contentDocument;
+}
+function key(k, opts) {
+  f.contentDocument.dispatchEvent(new KeyboardEvent('keydown',
+    Object.assign({ key: k, bubbles: true }, opts || {})));
+}
+function stepOf(d) {
+  const m = /step (\d+) \//.exec(d.body.textContent || '');
+  return m ? Number(m[1]) : -1;
+}
+
+async function main() {
+  f.src = 'index.html#/table?s=CK-classroom&step=0';
+  await new Promise((r) => { f.onload = r; });
+  await sleep(1500);
+  let d = f.contentDocument;
+
+  ck(d.body.dataset.ready === 'table', 'the explorer mounts');
+  ck(stepOf(d) === 1, 'a deep link with step=0 opens at the first step');
+
+  // --- keyboard --------------------------------------------------------
+  key('ArrowRight'); await sleep(250);
+  ck(stepOf(f.contentDocument) === 2, 'the right arrow moves one step');
+  key('ArrowLeft'); await sleep(250);
+  ck(stepOf(f.contentDocument) === 1, 'the left arrow moves back');
+  key('End'); await sleep(300);
+  const last = stepOf(f.contentDocument);
+  ck(last > 10, `the End key goes to the last step (${last})`);
+  key('Home'); await sleep(300);
+  ck(stepOf(f.contentDocument) === 1, 'the Home key goes back to the first step');
+
+  // --- the hash keeps the position -------------------------------------
+  key('ArrowRight'); key('ArrowRight'); await sleep(400);
+  ck(/step=2/.test(f.contentWindow.location.hash),
+    'the address bar carries the step: ' + f.contentWindow.location.hash);
+
+  // --- playback ---------------------------------------------------------
+  const before = stepOf(f.contentDocument);
+  key(' '); await sleep(1900); key(' '); await sleep(300);
+  ck(stepOf(f.contentDocument) > before, 'the space bar plays and pauses');
+
+  // --- the transport buttons -------------------------------------------
+  d = f.contentDocument;
+  const buttons = [...d.querySelectorAll('.transport .transport-group button')];
+  ck(buttons.length >= 7, `the transport has ${buttons.length} buttons`);
+  buttons[0].click(); await sleep(250);
+  ck(stepOf(f.contentDocument) === 1, 'the first-step button works');
+
+  // --- the scenario picker ---------------------------------------------
+  d = f.contentDocument;
+  const pick = [...d.querySelectorAll('.case-list button')]
+    .find((b) => b.dataset.id === 'CK-chain');
+  ck(!!pick, 'the scenario list holds CK-chain');
+  pick.click(); await sleep(1400);
+  ck(/s=CK-chain/.test(f.contentWindow.location.hash), 'choosing a scenario changes the URL');
+  ck(/CK-chain/.test(f.contentDocument.body.textContent), 'and the panels follow');
+
+  // --- a structure change needs a different main view -------------------
+  d = await goto('#/table?s=MC-least-loaded');
+  await sleep(900);
+  ck(!!f.contentDocument.querySelector('.buckets'),
+    'a bucketed scenario switches to the bucket view');
+  ck(!f.contentDocument.querySelector('#errbanner'), 'and it raises no error');
+
+  d = await goto('#/table?s=CK-classroom&step=8');
+  await sleep(900);
+  ck(!!f.contentDocument.querySelector('.tbl svg'), 'and back to the cuckoo view');
+
+  // --- every route -------------------------------------------------------
+  for (const r of ['tour', 'hash', 'lookup', 'variants', 'lab', 'sandbox', 'about']) {
+    d = await goto('#/' + r);
+    await sleep(r === 'lab' || r === 'variants' ? 2500 : 900);
+    ck(f.contentDocument.body.dataset.ready === r, `the ${r} route mounts`);
+    ck(!f.contentDocument.querySelector('#errbanner'), `the ${r} route raises no error`);
+  }
+
+  // --- the tour ----------------------------------------------------------
+  d = await goto('#/tour?t=0');
+  await sleep(900);
+  key('ArrowRight'); await sleep(800);
+  ck(/t=1/.test(f.contentWindow.location.hash), 'the tour moves with the arrow keys');
+  ck(!/null/.test(f.contentDocument.querySelector('.tour').textContent),
+    'the tour prints no stray null');
+
+  // --- a bad deep link must not break anything ---------------------------
+  d = await goto('#/table?s=does-not-exist&step=99999');
+  await sleep(1200);
+  ck(f.contentDocument.body.dataset.ready === 'table',
+    'an unknown scenario falls back instead of breaking');
+  ck(!f.contentDocument.querySelector('#errbanner'), 'and raises no error');
+
+  d = await goto('#/not-a-route');
+  await sleep(900);
+  ck(!!f.contentDocument.body.dataset.ready, 'an unknown route falls back');
+
+  document.getElementById('head').textContent = `${pass} ok, ${fail} failed`;
+  document.body.dataset.result = fail ? 'fail' : 'pass';
+}
+main().catch((e) => {
+  document.getElementById('head').textContent = 'threw: ' + e.message;
+  log.insertAdjacentHTML('beforeend', `<div class="bad">FAIL threw ${e.message}</div>`);
+  document.body.dataset.result = 'fail';
+});
+</script></body></html>

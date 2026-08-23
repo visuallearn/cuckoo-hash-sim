@@ -1,0 +1,176 @@
+{
+ "title": "A guided tour of cuckoo hashing",
+ "note": "Prose lives here so it can be edited without touching code. Each figure is a small view that reads a recorded trace, so no number in this text is invented.",
+ "steps": [
+  {
+   "id": "problem",
+   "title": "One key, one drawer",
+   "objectives": [1],
+   "body": [
+    "A hash table turns a key into a drawer number. You put the key in that drawer, and later you look in that same drawer to find it.",
+    "The problem is that two different keys can give the same number. That is a **collision**, and every hash table is a different answer to it.",
+    "Cuckoo hashing gives an unusual answer. Each key gets **k** possible drawers instead of one. If the drawer a key wants is taken, the key pushes the current occupant out. The occupant must then go to one of *its* other drawers."
+   ],
+   "fig": "problem"
+  },
+  {
+   "id": "two-homes",
+   "title": "Give every key k homes",
+   "objectives": [1],
+   "bind": { "scenario": "CK-classroom" },
+   "body": [
+    "Here are four words and a table of {{m}} buckets. Three hash functions give each word three bucket numbers.",
+    "This table of numbers is the whole contract of the data structure. Every word that the table holds is in one of its own {{k}} buckets, or on the stash.",
+    "Look at **ant** and **dog**. Two of their three numbers agree, so those two words have fewer than three different homes. Nothing in the reference sees this or corrects it."
+   ],
+   "fig": "candidates"
+  },
+  {
+   "id": "hash-math",
+   "title": "Where the numbers come from",
+   "objectives": [1],
+   "bind": { "scenario": "CK-classroom", "element": "ant", "function": 0 },
+   "body": [
+    "The numbers are not decoration. Each one is SHA-256 of a seed and the word, read as one 256-bit number, reduced to the range of the table.",
+    "The seed of hash function *j* is the decimal number *j*, written as text. For three hash functions the seeds are the one-character strings \"0\", \"1\" and \"2\".",
+    "The digest below is real. You can produce it yourself with any SHA-256 tool."
+   ],
+   "fig": "hashhead"
+  },
+  {
+   "id": "ladder",
+   "title": "Divide a 256-bit number",
+   "objectives": [1],
+   "bind": { "scenario": "CK-classroom", "element": "ant", "function": 0 },
+   "body": [
+    "A machine divides at most 128 bits at a time, and the digest is 256 bits. The reference therefore does the reduction in three steps, in base 2 to the power 64.",
+    "Each step keeps the remainder and puts it above the next 64 bits of the number. The last remainder is the bucket.",
+    "The result is the same as one 256-bit division. The three steps are how, not what."
+   ],
+   "fig": "ladder"
+  },
+  {
+   "id": "first-insert",
+   "title": "A lucky landing",
+   "objectives": [2],
+   "bind": { "scenario": "CK-first-contact", "step": 0 },
+   "body": [
+    "An insert is a loop with a budget. Each turn of the loop does three things: it draws one hash function, it computes one bucket, and it looks at that bucket.",
+    "If the bucket is free, the element stays there and the insert is complete.",
+    "Use the arrows below to move through the first insert of this run."
+   ],
+   "fig": "steps"
+  },
+  {
+   "id": "the-draw",
+   "title": "The coin flip nobody expects",
+   "objectives": [2, 5],
+   "bind": { "scenario": "CK-classroom", "step": 0 },
+   "body": [
+    "Most descriptions of cuckoo hashing say: look at your k buckets, take an empty one. **This code does not do that.**",
+    "It draws one hash function at random and looks at that one bucket. The draw happens on every attempt, and that includes the very first one.",
+    "So a fresh element with two empty homes can still land on the occupied one and start a chain. The draw below decided which.",
+    "A question worth stopping on. Given only the table and the word, which bucket will the code look at? You cannot know. You must see the draw."
+   ],
+   "fig": "draw"
+  },
+  {
+   "id": "eviction",
+   "title": "The cuckoo move",
+   "objectives": [2],
+   "bind": { "scenario": "CK-classroom", "event": "evict" },
+   "body": [
+    "When the bucket is taken, the code swaps. The new element goes in, and the old one comes out and becomes the element that must find a home.",
+    "This is a swap, not a search. The code does not ask whether the occupant has somewhere better to go.",
+    "The element that is out of the table is drawn above the row. Watch it change hands."
+   ],
+   "fig": "steps"
+  },
+  {
+   "id": "chains",
+   "title": "Chains, and going back",
+   "objectives": [4],
+   "bind": { "scenario": "CK-chain", "event": "evict" },
+   "body": [
+    "One insert can move several elements. Each move costs one unit of the same budget, so a successful landing after four evictions used five of the attempts.",
+    "The budget belongs to the insert, not to the element. There is no separate allowance for the elements that were pushed out.",
+    "Because the draw is random, a walk can also come back to a bucket it already visited and swap the same pair again. That costs budget and gains nothing."
+   ],
+   "fig": "steps",
+   "also": [
+    { "label": "See a walk that goes back and forth", "href": "#/table?s=CK-pingpong" }
+   ]
+  },
+  {
+   "id": "budget",
+   "title": "When the walk stops",
+   "objectives": [4, 5],
+   "bind": { "scenario": "CK-stash", "event": "stash_push" },
+   "body": [
+    "When the budget is gone, the element in hand has no bucket. The reference puts it on a **stash**.",
+    "It does not make a new set of hash functions. It does not build the table again. Most textbook treatments do both, and this code does neither.",
+    "The stash is outside the k-bucket contract, so it is drawn outside the row of buckets. A reader who checks only the k buckets will not find anything that lives there."
+   ],
+   "fig": "steps"
+  },
+  {
+   "id": "stash-full",
+   "title": "The only hard failure",
+   "objectives": [5],
+   "bind": { "scenario": "CK-stash-full", "event": "stash_overflow_error" },
+   "body": [
+    "By default the stash has no limit, so an insert always succeeds. A caller can set a limit, and then a full stash makes the insert fail.",
+    "That is the one error the table can return. The message below is the exact text from the source, carried in the trace rather than typed into this page."
+   ],
+   "fig": "steps"
+  },
+  {
+   "id": "lookup",
+   "title": "Finding keys in k looks",
+   "objectives": [3],
+   "bind": { "scenario": "CK-classroom", "event": "probe" },
+   "body": [
+    "A reader computes all {{k}} bucket numbers for the key and reads those {{k}} buckets. One of them holds the key, or the key is not in the table.",
+    "The cost does not grow with the number of keys. That is the point of the structure.",
+    "The reference table has no lookup method of its own. The code that does this is the client of the private-lookup protocol that the module was written for."
+   ],
+   "fig": "lookup"
+  },
+  {
+   "id": "order",
+   "title": "Same keys, another table",
+   "objectives": [2, 5],
+   "bind": { "scenario": "CK-order-a" },
+   "body": [
+    "The generator is a Mersenne Twister with the standard default seed, 5489, and the table never re-seeds it. So one order of inserts always gives one table, on every machine and every run.",
+    "Change the order and everything changes. The two runs below hold the same four words with the same parameters.",
+    "This is worth remembering when a test passes. It passed for that order."
+   ],
+   "fig": "orders"
+  },
+  {
+   "id": "real-params",
+   "title": "The production recipe",
+   "objectives": [5, 7],
+   "bind": { "scenario": "CK-production" },
+   "body": [
+    "In the protocol the module was written for, the numbers are fixed: three hash functions, buckets equal to 1.5 times the number of records, and a budget equal to the number of records. The stash has no limit.",
+    "The product 1.5 times *n* is assigned to an integer, so it truncates. Five records give seven buckets, not eight.",
+    "Those parameters are chosen so the stash stays empty. The layer above copies only the table into the database it serves, so a reader cannot get a key on the stash at all."
+   ],
+   "fig": "production"
+  },
+  {
+   "id": "your-turn",
+   "title": "Drive one yourself",
+   "objectives": [2],
+   "bind": { "scenario": "CK-order-b", "step": 0 },
+   "body": [
+    "Here is a run you have not seen. Before each step, say what will happen. The answer comes from the recorded trace, so the exercise marks itself.",
+    "You need three things, and you already have them: the table of candidate buckets, the drawn hash function, and the current contents of the table.",
+    "If you can do this, you can read the reference."
+   ],
+   "fig": "predict"
+  }
+ ]
+}

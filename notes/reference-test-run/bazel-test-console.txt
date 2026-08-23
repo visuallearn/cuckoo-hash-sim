@@ -1,0 +1,21 @@
+Computing main repo mapping: 
+Loading: 
+Loading: 0 packages loaded
+Analyzing: 17 targets (0 packages loaded, 0 targets configured)
+Analyzing: 17 targets (0 packages loaded, 0 targets configured)
+
+INFO: Analyzed 17 targets (0 packages loaded, 0 targets configured).
+INFO: Found 10 targets and 7 test targets...
+INFO: Elapsed time: 0.279s, Critical Path: 0.00s
+INFO: 1 process: 1 internal.
+INFO: Build completed successfully, 1 total action
+//pir/hashing:cuckoo_hash_table_test                            (cached) PASSED in 0.6s
+//pir/hashing:farm_hash_family_test                             (cached) PASSED in 0.1s
+//pir/hashing:hash_family_config_test                           (cached) PASSED in 0.1s
+//pir/hashing:hash_family_test                                  (cached) PASSED in 0.1s
+//pir/hashing:multiple_choice_hash_table_test                   (cached) PASSED in 0.3s
+//pir/hashing:sha256_hash_family_test                           (cached) PASSED in 0.6s
+//pir/hashing:simple_hash_table_test                            (cached) PASSED in 0.3s
+
+Executed 0 out of 7 tests: 7 tests pass.
+There were tests whose specified size is too big. Use the --test_verbose_timeout_warnings command line option to see which ones these are.

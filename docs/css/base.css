@@ -1,0 +1,161 @@
+/* Design tokens. The full light palette sits on bare :root, so no colour has
+   its only definition inside a media query; the dark blocks only re-point the
+   tokens. The site is the second in a series, so the structure follows the NTT
+   explorer and the hues shift: probe blue for hashing, amber for displacement. */
+:root {
+  --bg:            #f6f7f4;
+  --bg-panel:      #ffffff;
+  --bg-sunken:     #edeeea;
+  --bg-hover:      #e4e6e0;
+  --ink:           #1f2430;
+  --ink-soft:      #545a68;
+  --ink-faint:     #606672;
+  --rule:          #d7d9d3;
+  --rule-strong:   #8a8f82;
+  /* Element chips are hsl(hue 55% var(--chip-l)). One fixed lightness
+     cannot be readable on both a white bucket and a near-black one. */
+  --chip-l:        26%;
+
+  /* Meaning is never carried by hue alone: every state also changes weight,
+     shape, or carries a word. Every value here clears 4.5:1 against every
+     background it is used on, in both themes. tools/14_contrast.py enumerates
+     the pairs and fails on a regression. */
+  --probe:         #2b6b97;   /* the hash being evaluated, the active arrow  */
+  --probe-soft:    #dceaf4;
+  --evict:         #8d5d17;   /* displacement, the walker, the stash         */
+  --evict-soft:    #f8ecd6;
+  --settled:       #3b724c;   /* an element that is at rest in a bucket      */
+  --settled-soft:  #dcecdf;
+  --fail:          #a02c2c;   /* the one hard failure                        */
+  --fail-soft:     #f7dede;
+  --stash:         #7a4bb5;   /* off the k-probe grid                        */
+  --stash-soft:    #ebe0f7;
+
+  --mono: ui-monospace, "SF Mono", "Cascadia Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+  --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+  --r: 6px;
+  --pad: 0.75rem;
+  --shadow: 0 1px 2px rgba(0,0,0,.06), 0 4px 12px rgba(0,0,0,.04);
+  --t-fast: 240ms;
+  --t-arc: 420ms;
+}
+
+:root:not([data-theme="light"]) { color-scheme: light dark; }
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg:          #15171c;
+    --bg-panel:    #1d2027;
+    --bg-sunken:   #121419;
+    --bg-hover:    #292d36;
+    --ink:         #e8e9e6;
+    --ink-soft:    #a5a9b3;
+    --ink-faint:   #92969e;
+    --rule:        #31353d;
+    --rule-strong: #646c7a;
+    --chip-l:      74%;
+
+    --probe:       #74b0dd;
+    --probe-soft:  #17293a;
+    --evict:       #dfa74e;
+    --evict-soft:  #3a2c14;
+    --settled:     #7cc294;
+    --settled-soft:#1a2f21;
+    --fail:        #ec8888;
+    --fail-soft:   #3a1c1c;
+    --stash:       #c4a2f0;
+    --stash-soft:  #2a2340;
+
+    --shadow: 0 1px 2px rgba(0,0,0,.5), 0 4px 14px rgba(0,0,0,.35);
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg:          #15171c;
+  --bg-panel:    #1d2027;
+  --bg-sunken:   #121419;
+  --bg-hover:    #292d36;
+  --ink:         #e8e9e6;
+  --ink-soft:    #a5a9b3;
+  --ink-faint:   #92969e;
+  --rule:        #31353d;
+  --rule-strong: #646c7a;
+  --chip-l:      74%;
+
+  --probe:       #74b0dd;
+  --probe-soft:  #17293a;
+  --evict:       #dfa74e;
+  --evict-soft:  #3a2c14;
+  --settled:     #7cc294;
+  --settled-soft:#1a2f21;
+  --fail:        #ec8888;
+  --fail-soft:   #3a1c1c;
+  --stash:       #c4a2f0;
+  --stash-soft:  #2a2340;
+
+  --shadow: 0 1px 2px rgba(0,0,0,.5), 0 4px 14px rgba(0,0,0,.35);
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+a { color: var(--probe); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+a:hover { text-decoration-thickness: 2px; }
+
+h1, h2, h3, h4 { line-height: 1.25; margin: 0 0 .5em; font-weight: 620; }
+h1 { font-size: 1.5rem; }
+h2 { font-size: 1.15rem; }
+h3 { font-size: 1rem; }
+h4 { font-size: .875rem; letter-spacing: .02em; text-transform: uppercase; color: var(--ink-soft); }
+p  { margin: 0 0 .75em; }
+
+code, kbd, .mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+.skip-link {
+  position: absolute; left: -999px; top: 0; z-index: 100;
+  background: var(--bg-panel); padding: .5rem .75rem; border: 2px solid var(--probe);
+}
+.skip-link:focus { left: .5rem; top: .5rem; }
+
+:focus-visible { outline: 2px solid var(--probe); outline-offset: 2px; }
+
+input, select { max-width: 100%; }
+
+button, select, input {
+  font: inherit; color: inherit;
+  background: var(--bg-panel);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--r);
+  padding: .28rem .55rem;
+  min-height: 2rem;
+  cursor: pointer;
+}
+button:hover:not(:disabled), select:hover { background: var(--bg-hover); }
+button:disabled { opacity: .4; cursor: default; }
+button[aria-pressed="true"] { background: var(--probe-soft); border-color: var(--probe); }
+
+/* Reduced motion: land on the new state instead of gliding to it. The diagram
+   replaces the movement with a colour pulse; see the end of panels.css. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: 1ms !important;
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}

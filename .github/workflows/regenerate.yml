@@ -1,0 +1,38 @@
+# Rebuild every byte of docs/data/ from the pinned reference and fail if the
+# result differs from what is committed. Manual and monthly: building abseil is
+# too heavy for every push.
+name: Regenerate and verify traces
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Monthly, so bit rot in the toolchain surfaces before someone needs it.
+    - cron: '23 4 1 * *'
+
+jobs:
+  regenerate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            build-essential cmake git python3 libssl-dev curl unzip
+
+      - name: Regenerate and verify
+        run: ./tools/06_all.sh
+
+      - name: Fail if the committed data would change
+        run: |
+          paths="docs/data notes/pins.json notes/rng-golden.txt notes/test-mapping.md \
+                 notes/reference-sources.tar.gz notes/reference-sources.md \
+                 tools/scenarios.txt tools/scenario-predicates.json"
+          if ! git diff --quiet -- $paths; then
+            echo "::error::the generated files differ from a fresh generation."
+            git --no-pager diff --stat -- $paths
+            exit 1
+          fi
+          echo "the generated files match a fresh generation from the reference."

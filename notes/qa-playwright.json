@@ -1,0 +1,111 @@
+[
+ {
+  "name": "keyboard reaches the controls",
+  "pass": true,
+  "detail": "60 focus stops in the first 60 tabs"
+ },
+ {
+  "name": "the tab order cycles in under 60 stops",
+  "pass": true,
+  "detail": "33 distinct stops before the order repeats"
+ },
+ {
+  "name": "every focus stop has an accessible name",
+  "pass": true,
+  "detail": "0 without one"
+ },
+ {
+  "name": "no focus stop is invisible",
+  "pass": true,
+  "detail": "0 with zero size"
+ },
+ {
+  "name": "the first tab stop is the skip link",
+  "pass": true,
+  "detail": "skip-link \"Skip to main content\""
+ },
+ {
+  "name": "the skip link moves focus to the content",
+  "pass": true,
+  "detail": "main"
+ },
+ {
+  "name": "arrow keys move through the trace",
+  "pass": true,
+  "detail": "1 then 3"
+ },
+ {
+  "name": "End reaches the last step",
+  "pass": true,
+  "detail": "step 31"
+ },
+ {
+  "name": "Home returns to the first step",
+  "pass": true
+ },
+ {
+  "name": "the live region carries the narration",
+  "pass": true,
+  "detail": "238 characters"
+ },
+ {
+  "name": "the diagram has a text description",
+  "pass": true,
+  "detail": "93 characters"
+ },
+ {
+  "name": "normal motion: the walker travels",
+  "pass": true,
+  "detail": "springfrom for 0.42s"
+ },
+ {
+  "name": "reduced motion: the walker does not travel",
+  "pass": true,
+  "detail": "animation-name = none"
+ },
+ {
+  "name": "reduced motion: a colour pulse replaces the movement",
+  "pass": true,
+  "detail": "slotflash for 0.6s"
+ },
+ {
+  "name": "light scheme paints its own background",
+  "pass": true,
+  "detail": "rgb(246, 247, 244)"
+ },
+ {
+  "name": "dark scheme paints its own background",
+  "pass": true,
+  "detail": "rgb(21, 23, 28)"
+ },
+ {
+  "name": "cold load to first interaction is under 1 s",
+  "pass": true,
+  "detail": "median 851 ms of [844,846,851,851,859]"
+ },
+ {
+  "name": "__timings",
+  "pass": true,
+  "detail": "[844,846,851,851,859]"
+ },
+ {
+  "name": "the sandbox badges every panel as computed",
+  "pass": true,
+  "detail": "4 sandbox badges"
+ },
+ {
+  "name": "and shows no \"recorded from C++\" badge",
+  "pass": true,
+  "detail": "0 recorded badges"
+ },
+ {
+  "name": "__sandboxBadge",
+  "pass": true,
+  "detail": "{\"color\":\"rgb(141, 93, 23)\",\"border\":\"rgb(141, 93, 23)\",\"bg\":\"rgb(248, 236, 214)\"}"
+ },
+ {
+  "name": "the explorer badges every panel as recorded",
+  "pass": true,
+  "detail": "3 recorded badges"
+ }
+]

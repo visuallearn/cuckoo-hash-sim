@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites tests="3" failures="0" disabled="0" errors="0" time="0.128" timestamp="2026-08-23T16:48:45.998" name="AllTests">
+  <testsuite name="Sha256HashFunction" tests="1" failures="0" disabled="0" skipped="0" errors="0" time="0." timestamp="2026-08-23T16:48:45.998">
+    <testcase name="IsAHashFunction" file="pir/hashing/sha256_hash_family_test.cc" line="32" status="run" result="completed" time="0." timestamp="2026-08-23T16:48:45.998" classname="Sha256HashFunction" />
+  </testsuite>
+  <testsuite name="Sha256HashFamily" tests="2" failures="0" disabled="0" skipped="0" errors="0" time="0.128" timestamp="2026-08-23T16:48:45.998">
+    <testcase name="IsAHashFamily" file="pir/hashing/sha256_hash_family_test.cc" line="37" status="run" result="completed" time="0." timestamp="2026-08-23T16:48:45.998" classname="Sha256HashFamily" />
+    <testcase name="HashesCorrectly" file="pir/hashing/sha256_hash_family_test.cc" line="42" status="run" result="completed" time="0.128" timestamp="2026-08-23T16:48:45.999" classname="Sha256HashFamily" />
+  </testsuite>
+</testsuites>

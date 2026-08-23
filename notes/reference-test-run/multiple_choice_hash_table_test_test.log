@@ -1,0 +1,25 @@
+exec ${PAGER:-/usr/bin/less} "$0" || exit 1
+Executing tests from //pir/hashing:multiple_choice_hash_table_test
+-----------------------------------------------------------------------------
+Running main() from gmock_main.cc
+[==========] Running 5 tests from 2 test suites.
+[----------] Global test environment set-up.
+[----------] 2 tests from MultipleChoiceHashTableTest
+[ RUN      ] MultipleChoiceHashTableTest.TestInsert
+[       OK ] MultipleChoiceHashTableTest.TestInsert (0 ms)
+[ RUN      ] MultipleChoiceHashTableTest.TestOverflow
+[       OK ] MultipleChoiceHashTableTest.TestOverflow (4 ms)
+[----------] 2 tests from MultipleChoiceHashTableTest (5 ms total)
+
+[----------] 3 tests from MultipleChoiceHashTable
+[ RUN      ] MultipleChoiceHashTable.FailsIfNumBucketsNegative
+[       OK ] MultipleChoiceHashTable.FailsIfNumBucketsNegative (0 ms)
+[ RUN      ] MultipleChoiceHashTable.FailsIfNumHashFunctionsNegative
+[       OK ] MultipleChoiceHashTable.FailsIfNumHashFunctionsNegative (0 ms)
+[ RUN      ] MultipleChoiceHashTable.FailsIfMaxBucketSizeNegative
+[       OK ] MultipleChoiceHashTable.FailsIfMaxBucketSizeNegative (0 ms)
+[----------] 3 tests from MultipleChoiceHashTable (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 5 tests from 2 test suites ran. (5 ms total)
+[  PASSED  ] 5 tests.

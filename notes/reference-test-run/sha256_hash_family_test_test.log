@@ -1,0 +1,21 @@
+exec ${PAGER:-/usr/bin/less} "$0" || exit 1
+Executing tests from //pir/hashing:sha256_hash_family_test
+-----------------------------------------------------------------------------
+Running main() from gmock_main.cc
+[==========] Running 3 tests from 2 test suites.
+[----------] Global test environment set-up.
+[----------] 1 test from Sha256HashFunction
+[ RUN      ] Sha256HashFunction.IsAHashFunction
+[       OK ] Sha256HashFunction.IsAHashFunction (0 ms)
+[----------] 1 test from Sha256HashFunction (0 ms total)
+
+[----------] 2 tests from Sha256HashFamily
+[ RUN      ] Sha256HashFamily.IsAHashFamily
+[       OK ] Sha256HashFamily.IsAHashFamily (0 ms)
+[ RUN      ] Sha256HashFamily.HashesCorrectly
+[       OK ] Sha256HashFamily.HashesCorrectly (128 ms)
+[----------] 2 tests from Sha256HashFamily (128 ms total)
+
+[----------] Global test environment tear-down
+[==========] 3 tests from 2 test suites ran. (128 ms total)
+[  PASSED  ] 3 tests.

@@ -1,0 +1,129 @@
+<!DOCTYPE html><html><head><meta charset="utf-8">
+<title>audit</title>
+<style>
+ body{font:13px ui-monospace,monospace;margin:1rem}
+ .ok{color:#2a7}.bad{color:#c33;font-weight:700}
+ #head{font-weight:700;margin-bottom:.5rem}
+ iframe{border:1px solid #ccc;width:1500px;height:1100px}
+</style></head><body>
+<div id="head">running</div>
+<div id="log"></div>
+<iframe id="f" title="site under test"></iframe>
+<script>
+// The things that break quietly: listeners that outlive their route, state that
+// does not survive a reload, and controls that are not reachable by keyboard.
+// A development aid; never part of the published site.
+const log = document.getElementById('log');
+const f = document.getElementById('f');
+let pass = 0, fail = 0;
+function ck(cond, msg) {
+  if (cond) { pass++; log.insertAdjacentHTML('beforeend', `<div class="ok">ok   ${msg}</div>`); }
+  else { fail++; log.insertAdjacentHTML('beforeend', `<div class="bad">FAIL ${msg}</div>`); }
+}
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+async function goto(hash, wait) {
+  f.contentWindow.location.hash = hash;
+  await sleep(wait || 900);
+}
+
+async function main() {
+  f.src = 'index.html#/table?s=CK-classroom&step=0';
+  await new Promise((r) => { f.onload = r; });
+  await sleep(1600);
+
+  // --- subscription leaks -------------------------------------------------
+  const store = await f.contentWindow.eval(
+    "import('./js/store.js?v=probe').then(m => m)");
+  const baseline = store.listenerCount();
+  for (let i = 0; i < 4; i++) {
+    await goto('#/tour?t=0');
+    await goto('#/about');
+    await goto('#/table?s=CK-classroom&step=3');
+  }
+  await sleep(600);
+  const after = store.listenerCount();
+  ck(after <= baseline + 2,
+    `route churn leaves ${after} listeners (started at ${baseline})`);
+
+  // --- state survives a reload -------------------------------------------
+  await goto('#/table?s=CK-stash&step=5', 1200);
+  const hash = f.contentWindow.location.hash;
+  f.contentWindow.location.reload();
+  await new Promise((r) => { f.onload = r; });
+  await sleep(1600);
+  ck(f.contentWindow.location.hash === hash,
+    `a reload keeps the position: ${f.contentWindow.location.hash}`);
+
+  // --- history ------------------------------------------------------------
+  await goto('#/about');
+  await goto('#/variants', 2200);
+  f.contentWindow.history.back();
+  await sleep(1400);
+  ck(/about/.test(f.contentWindow.location.hash),
+    'the back button returns to the previous view');
+
+  // --- keyboard reach -----------------------------------------------------
+  await goto('#/table?s=CK-classroom&step=2', 1400);
+  const d = f.contentDocument;
+  const focusable = d.querySelectorAll(
+    'a[href], button:not([disabled]), select, input, [tabindex]:not([tabindex="-1"])');
+  ck(focusable.length > 20, `${focusable.length} elements are reachable by keyboard`);
+  const unlabelled = [...d.querySelectorAll('button')].filter(
+    (b) => !b.textContent.trim() && !b.getAttribute('aria-label') && !b.title);
+  ck(unlabelled.length === 0,
+    `every button carries a name (${unlabelled.length} without one)`);
+  // The two ribbons are a scrubber and are deliberately fine-grained; every
+  // action they offer is also on a primary button and on a key.
+  const small = [...d.querySelectorAll('.transport .transport-group button, .topbar-nav a')]
+    .filter((b) => {
+      const r = b.getBoundingClientRect();
+      return r.height > 0 && r.height < 38;
+    });
+  ck(small.length === 0, `the primary controls are large enough to hit`
+    + ` (${small.length} below 38px)`);
+  const ribbon = [...d.querySelectorAll('.tl button, .tl-ops button')];
+  ck(ribbon.every((b) => b.getAttribute('aria-label') || b.title),
+    `all ${ribbon.length} ribbon ticks carry a name`);
+
+  // --- the live region ----------------------------------------------------
+  const live = d.getElementById('live');
+  ck(!!live && live.textContent.trim().length > 10,
+    'the live region carries the narration for a screen reader');
+
+  // --- the animation is not the only carrier ------------------------------
+  ck(!!d.querySelector('.log table tr'), 'every step also appears as text');
+  ck(!!d.querySelector('.tbl svg[aria-label]'),
+    'the diagram carries a text description');
+
+  // --- a racing picker ----------------------------------------------------
+  const list = [...d.querySelectorAll('.case-list button')];
+  list[1].click(); list[3].click(); list[0].click();
+  await sleep(2000);
+  ck(!f.contentDocument.querySelector('#errbanner'),
+    'three scenario clicks in a row raise no error');
+  const pressed = [...f.contentDocument.querySelectorAll('.case-list button')]
+    .filter((b) => b.getAttribute('aria-pressed') === 'true');
+  ck(pressed.length === 1, `exactly one scenario is selected (${pressed.length})`);
+
+  // --- the sandbox --------------------------------------------------------
+  await goto('#/sandbox', 2000);
+  const sd = f.contentDocument;
+  const input = sd.querySelector('input[type=text]');
+  ck(!!input, 'the sandbox takes free input');
+  input.value = 'one two three four';
+  input.dispatchEvent(new Event('input', { bubbles: true }));
+  [...sd.querySelectorAll('button')].find((b) => b.textContent === 'run it').click();
+  await sleep(1500);
+  ck(/one/.test(f.contentDocument.body.textContent), 'and runs what was typed');
+  ck(!!f.contentDocument.querySelector('.badge.sandbox'),
+    'and marks the result as computed rather than recorded');
+
+  document.getElementById('head').textContent = `${pass} ok, ${fail} failed`;
+  document.body.dataset.result = fail ? 'fail' : 'pass';
+}
+main().catch((e) => {
+  document.getElementById('head').textContent = 'threw: ' + e.message;
+  log.insertAdjacentHTML('beforeend', `<div class="bad">FAIL threw ${e.message}</div>`);
+  document.body.dataset.result = 'fail';
+});
+</script></body></html>

@@ -1,0 +1,36 @@
+exec ${PAGER:-/usr/bin/less} "$0" || exit 1
+Executing tests from //pir/hashing:cuckoo_hash_table_test
+-----------------------------------------------------------------------------
+Running main() from gmock_main.cc
+[==========] Running 7 tests from 2 test suites.
+[----------] Global test environment set-up.
+[----------] 2 tests from CuckooHashTableTest
+[ RUN      ] CuckooHashTableTest.TestInsert
+
+GMOCK WARNING:
+Uninteresting mock function call - taking default action specified at:
+pir/hashing/cuckoo_hash_table_test.cc:59:
+    Function call: Call("Hello Cuckoo", 100)
+          Returns: 99
+NOTE: You can safely ignore the above warning unless this call should not happen.  Do not suppress it by blindly adding an EXPECT_CALL() if you don't mean to enforce the call.  See https://github.com/google/googletest/blob/main/docs/gmock_cook_book.md#knowing-when-to-expect-useoncall for details.
+[       OK ] CuckooHashTableTest.TestInsert (0 ms)
+[ RUN      ] CuckooHashTableTest.TestStashLimit
+[       OK ] CuckooHashTableTest.TestStashLimit (38 ms)
+[----------] 2 tests from CuckooHashTableTest (38 ms total)
+
+[----------] 5 tests from CuckooHashTable
+[ RUN      ] CuckooHashTable.TestDefaultUnlimitedStash
+[       OK ] CuckooHashTable.TestDefaultUnlimitedStash (238 ms)
+[ RUN      ] CuckooHashTable.FailsIfNumBucketsNegative
+[       OK ] CuckooHashTable.FailsIfNumBucketsNegative (0 ms)
+[ RUN      ] CuckooHashTable.FailsIfNumHashFunctionsLessThanTwo
+[       OK ] CuckooHashTable.FailsIfNumHashFunctionsLessThanTwo (0 ms)
+[ RUN      ] CuckooHashTable.FailsIfMaxRelocationsNegative
+[       OK ] CuckooHashTable.FailsIfMaxRelocationsNegative (0 ms)
+[ RUN      ] CuckooHashTable.FailsIfMaxStashSizeNegative
+[       OK ] CuckooHashTable.FailsIfMaxStashSizeNegative (0 ms)
+[----------] 5 tests from CuckooHashTable (238 ms total)
+
+[----------] Global test environment tear-down
+[==========] 7 tests from 2 test suites ran. (277 ms total)
+[  PASSED  ] 7 tests.

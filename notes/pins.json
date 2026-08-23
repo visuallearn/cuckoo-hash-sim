@@ -1,0 +1,139 @@
+{
+ "commit": "859cafa71fc1e139c7b76d4d4c0f23438688a8ad",
+ "commitShort": "859cafa71fc1",
+ "files": {
+  "MODULE.bazel": {
+   "bytes": 2871,
+   "permalink": "https://github.com/google/distributed_point_functions/blob/859cafa71fc1e139c7b76d4d4c0f23438688a8ad/MODULE.bazel",
+   "sha256": "ee8be8429a6fbc2b75bdc8df056cbe202a37d5c4e28bcd2c291c4a4663be5ebc"
+  },
+  "pir/cuckoo_hashed_dpf_pir_database.cc": {
+   "bytes": 7211,
+   "permalink": "https://github.com/google/distributed_point_functions/blob/859cafa71fc1e139c7b76d4d4c0f23438688a8ad/pir/cuckoo_hashed_dpf_pir_database.cc",
+   "sha256": "fb17c87d465656553af04205916926fd7a0ced14c4acd7fc64d9c527474eaf27"
+  },
+  "pir/cuckoo_hashing_sparse_dpf_pir_client.cc": {
+   "bytes": 8932,
+   "permalink": "https://github.com/google/distributed_point_functions/blob/859cafa71fc1e139c7b76d4d4c0f23438688a8ad/pir/cuckoo_hashing_sparse_dpf_pir_client.cc",
+   "sha256": "41ebd8ea092bca50e046eaa7741bee82c42aaccb6254d1449b523e454fa6c20b"
+  },
+  "pir/cuckoo_hashing_sparse_dpf_pir_server.cc": {
+   "bytes": 7604,
+   "permalink": "https://github.com/google/distributed_point_functions/blob/859cafa71fc1e139c7b76d4d4c0f23438688a8ad/pir/cuckoo_hashing_sparse_dpf_pir_server.cc",
+   "sha256": "447f1774250e9b2520e0015677549cb33639bb48bb82129ca58ad9b6e7ae93a5"
+  },
+  "pir/cuckoo_hashing_sparse_dpf_pir_server.h": {
+   "bytes": 5538,
+   "permalink": "https://github.com/google/distributed_point_functions/blob/859cafa71fc1e139c7b76d4d4c0f23438688a8ad/pir/cuckoo_hashing_sparse_dpf_pir_server.h",
+   "sha256": "108686814d4dfc9cfe436cbca4329866ed62a0d047c6f4198396eec8e96f31d8"
+  },
+  "pir/hashing/BUILD": {
+   "bytes": 7817,
+   "permalink": "https://github.com/google/distributed_point_functions/blob/859cafa71fc1e139c7b76d4d4c0f23438688a8ad/pir/hashing/BUILD",
+   "sha256": "6019800beb162122c475917e0f662cc4d50c1a854bf826ce9bb96492c0f9c93f"
+  },
+  "pir/hashing/cuckoo_hash_table.cc": {
+   "bytes": 3409,
+   "permalink": "https://github.com/google/distributed_point_functions/blob/859cafa71fc1e139c7b76d4d4c0f23438688a8ad/pir/hashing/cuckoo_hash_table.cc",
+   "sha256": "2928ee62b76129932641a1c99ac3e9ec99067acd4a968eddb59121487d2f340d"
+  },
+  "pir/hashing/cuckoo_hash_table.h": {
+   "bytes": 4485,
+   "permalink": "https://github.com/google/distributed_point_functions/blob/859cafa71fc1e139c7b76d4d4c0f23438688a8ad/pir/hashing/cuckoo_hash_table.h",
+   "sha256": "5ae9ac5ddaf710317e44a6c73c97dc43f4f8781f6c1d97f5ddc8b385887fd7ea"
+  },
+  "pir/hashing/cuckoo_hash_table_test.cc": {
+   "bytes": 6278,
+   "permalink": "https://github.com/google/distributed_point_functions/blob/859cafa71fc1e139c7b76d4d4c0f23438688a8ad/pir/hashing/cuckoo_hash_table_test.cc",
+   "sha256": "323ea09df752fdae9ea9fb6d48de1546ebcc8a15db32e403487a5dac1d04868d"
+  },
+  "pir/hashing/farm_hash_family.cc": {
+   "bytes": 1141,
+   "permalink": "https://github.com/google/distributed_point_functions/blob/859cafa71fc1e139c7b76d4d4c0f23438688a8ad/pir/hashing/farm_hash_family.cc",
+   "sha256": "5d6265b7396430e055d9d32dfffe2d84bcaedba5f6473a4dc8ac485c24b14007"
+  },
+  "pir/hashing/farm_hash_family.h": {
+   "bytes": 1476,
+   "permalink": "https://github.com/google/distributed_point_functions/blob/859cafa71fc1e139c7b76d4d4c0f23438688a8ad/pir/hashing/farm_hash_family.h",
+   "sha256": "9548736901f05944526cc3e4dbd0a74f7c1db0725ea46d8f4cd856b657fb13d4"
+  },
+  "pir/hashing/hash_family.cc": {
+   "bytes": 1336,
+   "permalink": "https://github.com/google/distributed_point_functions/blob/859cafa71fc1e139c7b76d4d4c0f23438688a8ad/pir/hashing/hash_family.cc",
+   "sha256": "a421c1e9ccf40a5fa1b7d4c6f03b699432bdf67282628da5ec31aca2c58810e0"
+  },
+  "pir/hashing/hash_family.h": {
+   "bytes": 2428,
+   "permalink": "https://github.com/google/distributed_point_functions/blob/859cafa71fc1e139c7b76d4d4c0f23438688a8ad/pir/hashing/hash_family.h",
+   "sha256": "5fa658b68d0941f327a31bdd4e444d40a10962438015d0b600a5d5d50b24afb7"
+  },
+  "pir/hashing/hash_family_config.cc": {
+   "bytes": 1608,
+   "permalink": "https://github.com/google/distributed_point_functions/blob/859cafa71fc1e139c7b76d4d4c0f23438688a8ad/pir/hashing/hash_family_config.cc",
+   "sha256": "bc84b7af2e2eb67b207515507826f726823c267ca5833028d1367254651c7d73"
+  },
+  "pir/hashing/hash_family_config.h": {
+   "bytes": 1238,
+   "permalink": "https://github.com/google/distributed_point_functions/blob/859cafa71fc1e139c7b76d4d4c0f23438688a8ad/pir/hashing/hash_family_config.h",
+   "sha256": "103bb7f0887a3bf1dc50c97d766894a25023d3f268a58d4cfc1e25e42a3541d7"
+  },
+  "pir/hashing/hash_family_config.proto": {
+   "bytes": 1195,
+   "permalink": "https://github.com/google/distributed_point_functions/blob/859cafa71fc1e139c7b76d4d4c0f23438688a8ad/pir/hashing/hash_family_config.proto",
+   "sha256": "10d77a1a70ec9bfba5534e78562eb100b7f41d13d3cc93bf4f5d4cd3516134c9"
+  },
+  "pir/hashing/hash_family_test.cc": {
+   "bytes": 2330,
+   "permalink": "https://github.com/google/distributed_point_functions/blob/859cafa71fc1e139c7b76d4d4c0f23438688a8ad/pir/hashing/hash_family_test.cc",
+   "sha256": "d6e5c4a8b0d0490610865bf0844e24bb664db87a130f3f58d1f4e74fd1208a3a"
+  },
+  "pir/hashing/multiple_choice_hash_table.cc": {
+   "bytes": 2708,
+   "permalink": "https://github.com/google/distributed_point_functions/blob/859cafa71fc1e139c7b76d4d4c0f23438688a8ad/pir/hashing/multiple_choice_hash_table.cc",
+   "sha256": "14443592e5f012db6ab82c376484b24d4892c8b784ec068b2b88546dc08bc9b8"
+  },
+  "pir/hashing/multiple_choice_hash_table.h": {
+   "bytes": 3374,
+   "permalink": "https://github.com/google/distributed_point_functions/blob/859cafa71fc1e139c7b76d4d4c0f23438688a8ad/pir/hashing/multiple_choice_hash_table.h",
+   "sha256": "a232631cd6a581da5ba67116fc20446e54084db863cb834024e3052639708d3a"
+  },
+  "pir/hashing/multiple_choice_hash_table_test.cc": {
+   "bytes": 3874,
+   "permalink": "https://github.com/google/distributed_point_functions/blob/859cafa71fc1e139c7b76d4d4c0f23438688a8ad/pir/hashing/multiple_choice_hash_table_test.cc",
+   "sha256": "2eaa08bb3949ad2a210af09ee690305a867ed9fabfb2b837329eceeb4c739e9f"
+  },
+  "pir/hashing/sha256_hash_family.cc": {
+   "bytes": 3088,
+   "permalink": "https://github.com/google/distributed_point_functions/blob/859cafa71fc1e139c7b76d4d4c0f23438688a8ad/pir/hashing/sha256_hash_family.cc",
+   "sha256": "531d12f27c373e53be67cdb5939de4f4a2d6c54aeda5b1b0d532d57f21172666"
+  },
+  "pir/hashing/sha256_hash_family.h": {
+   "bytes": 1665,
+   "permalink": "https://github.com/google/distributed_point_functions/blob/859cafa71fc1e139c7b76d4d4c0f23438688a8ad/pir/hashing/sha256_hash_family.h",
+   "sha256": "d31bd1482cfb186ca6137e465d460f52915f0f547fa2a56c4211022a3dd81e69"
+  },
+  "pir/hashing/sha256_hash_family_test.cc": {
+   "bytes": 3208,
+   "permalink": "https://github.com/google/distributed_point_functions/blob/859cafa71fc1e139c7b76d4d4c0f23438688a8ad/pir/hashing/sha256_hash_family_test.cc",
+   "sha256": "a1420f921b8bf3afa484a6f0d5a9d84c2e9d5275c45e47858cc41301f5882d69"
+  },
+  "pir/hashing/simple_hash_table.cc": {
+   "bytes": 2694,
+   "permalink": "https://github.com/google/distributed_point_functions/blob/859cafa71fc1e139c7b76d4d4c0f23438688a8ad/pir/hashing/simple_hash_table.cc",
+   "sha256": "b74d2ea0fbd98b240026f40e061568edd836b45898ecfcfc3eccdb6f33dceafa"
+  },
+  "pir/hashing/simple_hash_table.h": {
+   "bytes": 3421,
+   "permalink": "https://github.com/google/distributed_point_functions/blob/859cafa71fc1e139c7b76d4d4c0f23438688a8ad/pir/hashing/simple_hash_table.h",
+   "sha256": "b6a2b6d2768c0840bbf586686f28a6f5218246224d978be966c1c74fafe8adbf"
+  },
+  "pir/hashing/simple_hash_table_test.cc": {
+   "bytes": 3951,
+   "permalink": "https://github.com/google/distributed_point_functions/blob/859cafa71fc1e139c7b76d4d4c0f23438688a8ad/pir/hashing/simple_hash_table_test.cc",
+   "sha256": "c892d7e33543d802cc075cd05442df6ce892bc9d7c2efe24f643f565b1edf8ee"
+  }
+ },
+ "license": "Apache-2.0",
+ "note": "Google's open-source cuckoo hashing lives here, not in google/private-join-and-compute. See notes/FIDELITY.md section 0.",
+ "repo": "https://github.com/google/distributed_point_functions"
+}

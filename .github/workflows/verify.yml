@@ -1,0 +1,88 @@
+# The checks that need no compiler and no network. These run on every push, so
+# a change to the site or to the committed data is checked immediately.
+name: Verify
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  data:
+    name: Re-derive every trace, independently
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      # A second implementation, in Python, recomputing every field of every
+      # shipped trace from hashlib and a hand-written Mersenne Twister.
+      - name: tools/04_verify.py
+        run: python3 tools/04_verify.py
+
+      - name: The scenarios still contain the events they are named for
+        run: python3 tools/mine.py --check
+
+  site:
+    name: Prose, colour and asset stamps
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Simplified Technical English structural check
+        run: python3 tools/10_ste_check.py
+      - name: Every colour pair, both themes
+        run: python3 tools/14_contrast.py
+      - name: Asset stamps are current
+        run: python3 tools/11_stamp_assets.py --check
+
+  browser:
+    name: In-browser self-test, layout, keyboard, accessibility
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install chromium
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends chromium-browser
+          sudo ln -sf "$(command -v chromium-browser)" /usr/local/bin/chromium
+
+      - name: Install the quality tools
+        working-directory: tools/qa
+        run: |
+          npm ci --no-audit --no-fund || npm install --no-audit --no-fund
+          npx playwright install --with-deps chromium
+
+      - name: Serve
+        run: |
+          python3 tools/serve.py 8791 &
+          for i in $(seq 1 20); do curl -sf -o /dev/null http://localhost:8791/index.html && break; sleep 1; done
+
+      # Replays every trace through the browser engine and checks the structure
+      # of every file the browser actually downloads.
+      - name: tools/08_browser_check.py
+        run: python3 tools/08_browser_check.py 8791
+
+      # Lighthouse, keyboard-only reach, reduced motion, size and timing.
+      - name: tools/13_qa.py
+        run: python3 tools/13_qa.py 8791
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: qa-screenshots
+          path: notes/qa-screenshots/

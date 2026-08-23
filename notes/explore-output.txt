@@ -1,0 +1,224 @@
+
+================ 1. h_j(x) for the classroom word pool, m = 6, k = 3, bare family ================
+  seeds: "0" "1" "2"
+  word      h0    h1    h2   distinct
+  ant        5     0     0   2
+  bee        5     1     0   3
+  cat        2     5     0   3
+  dog        0     0     4   2
+  eel        4     5     4   2
+  fox        0     1     2   3
+  gnu        3     1     2   3
+  hen        1     2     5   3
+  ibis       5     1     5   2
+  jay        4     1     3   3
+  koi        3     3     1   2
+  lynx       4     5     1   3
+  mole       3     5     2   3
+  newt       4     4     2   2
+  owl        2     1     1   2
+  pig        2     4     3   3
+
+================ 2. the whole ladder for h_0("ant") mod 6 ================
+  input to SHA-256 : "0" || "ant"  = 30616e74
+  digest           : d3d063292b9f2163c3cb847a8601a69f359e88fbd6345229be5f1c28ee7f7233
+  lo = LE(d[0..15]): 0x9fa601867a84cbc363219f2b2963d0d3
+  hi = LE(d[16..31]): 0x33727fee281c5fbe295234d6fb889e35
+  N as one integer : 23270258785608834855485564551447774929263175659695773196027245351691792666835
+  r1 = hi mod 6    : 1
+  d2 = r1*2^64+hi64(lo) = 29950628048966831043
+  r2 = d2 mod 6    : 3
+  d3 = r2*2^64+lo64(lo) = 62483397712841789651
+  r3 = d3 mod 6    : 5   <- the bucket
+  real function    : 5
+
+================ 3. classroom build, m = 6, k = 3, budget = 4 ================
+  m=6 k=3 budget=4 stash=unlimited
+    insert ant   OK        [ant, _, _, _, _, _]  stash=[]
+    insert bee   OK        [ant, bee, _, _, _, _]  stash=[]
+    insert cat   OK        [cat, bee, _, _, _, ant]  stash=[]
+    insert dog   OK        [cat, bee, _, _, dog, ant]  stash=[]
+
+================ 4. the same four words in other orders (quirk Q7) ================
+  m=6 k=3 budget=4 stash=unlimited
+    insert dog   OK        [_, _, _, _, dog, _]  stash=[]
+    insert cat   OK        [_, _, _, _, dog, cat]  stash=[]
+    insert bee   OK        [bee, _, _, _, dog, cat]  stash=[]
+    insert ant   OK        [ant, _, _, _, dog, bee]  stash=[cat]
+  m=6 k=3 budget=4 stash=unlimited
+    insert bee   OK        [bee, _, _, _, _, _]  stash=[]
+    insert ant   OK        [bee, _, _, _, _, ant]  stash=[]
+    insert dog   OK        [bee, _, _, _, dog, ant]  stash=[]
+    insert cat   OK        [bee, _, cat, _, dog, ant]  stash=[]
+  m=6 k=3 budget=4 stash=unlimited
+    insert cat   OK        [cat, _, _, _, _, _]  stash=[]
+    insert dog   OK        [cat, _, _, _, _, _]  stash=[dog]
+    insert ant   OK        [cat, _, _, _, _, ant]  stash=[dog]
+    insert bee   OK        [bee, _, cat, _, _, ant]  stash=[dog]
+
+================ 5. the relocation budget (quirks Q5, Q6, Q8) ================
+  m=6 k=3 budget=0 stash=unlimited
+    insert ant   OK        [_, _, _, _, _, _]  stash=[ant]
+    insert bee   OK        [_, _, _, _, _, _]  stash=[ant, bee]
+    insert cat   OK        [_, _, _, _, _, _]  stash=[ant, bee, cat]
+    insert dog   OK        [_, _, _, _, _, _]  stash=[ant, bee, cat, dog]
+  m=6 k=3 budget=1 stash=unlimited
+    insert ant   OK        [ant, _, _, _, _, _]  stash=[]
+    insert bee   OK        [ant, bee, _, _, _, _]  stash=[]
+    insert cat   OK        [cat, bee, _, _, _, _]  stash=[ant]
+    insert dog   OK        [dog, bee, _, _, _, _]  stash=[ant, cat]
+  m=6 k=3 budget=2 stash=unlimited
+    insert ant   OK        [ant, _, _, _, _, _]  stash=[]
+    insert bee   OK        [ant, bee, _, _, _, _]  stash=[]
+    insert cat   OK        [cat, bee, _, _, _, ant]  stash=[]
+    insert dog   OK        [cat, bee, _, _, dog, ant]  stash=[]
+  m=6 k=3 budget=4 stash=unlimited
+    insert ant   OK        [ant, _, _, _, _, _]  stash=[]
+    insert bee   OK        [ant, bee, _, _, _, _]  stash=[]
+    insert cat   OK        [cat, bee, _, _, _, ant]  stash=[]
+    insert dog   OK        [cat, bee, _, _, dog, ant]  stash=[]
+  m=6 k=3 budget=50 stash=unlimited
+    insert ant   OK        [ant, _, _, _, _, _]  stash=[]
+    insert bee   OK        [ant, bee, _, _, _, _]  stash=[]
+    insert cat   OK        [cat, bee, _, _, _, ant]  stash=[]
+    insert dog   OK        [cat, bee, _, _, dog, ant]  stash=[]
+
+================ 6. a bounded stash ================
+  m=4 k=2 budget=2 stash=1
+    insert ant   OK        [_, _, _, ant]  stash=[]
+    insert bee   OK        [_, bee, _, ant]  stash=[]
+    insert cat   OK        [cat, bee, _, ant]  stash=[]
+    insert dog   OK        [cat, bee, dog, ant]  stash=[]
+    insert eel   OK        [cat, bee, dog, ant]  stash=[eel]
+    insert fox   INTERNAL  [cat, bee, dog, ant]  stash=[eel]
+      message: "Cannot insert element: stash is full"
+
+================ 7. duplicates are allowed (quirk Q4) ================
+  m=6 k=3 budget=4 stash=unlimited
+    insert ant   OK        [ant, _, _, _, _, _]  stash=[]
+    insert ant   OK        [ant, _, _, _, _, ant]  stash=[]
+    insert ant   OK        [ant, _, _, _, _, ant]  stash=[ant]
+
+================ 8. degenerate: m = 1, k = 2 ================
+  m=1 k=2 budget=4 stash=unlimited
+    insert ant   OK        [ant]  stash=[]
+    insert bee   OK        [ant]  stash=[bee]
+
+================ 9. what Create rejects ================
+  num_buckets = 0        -> INVALID_ARGUMENT num_buckets must be positive
+  k = 1                  -> INVALID_ARGUMENT hash_functions.size() must be at least 2
+  max_relocations = -1   -> INVALID_ARGUMENT max_relocations must be non-negative
+  max_stash_size = -1    -> INVALID_ARGUMENT max_stash_size must be non-negative
+  max_relocations = 0    -> OK 
+  max_stash_size = 0     -> OK 
+
+================ 10. MultipleChoiceHashTable, m = 6 ================
+  k=2 cap=unlimited
+    insert ant  OK        0:{} 1:{} 2:{} 3:{} 4:{} 5:{ant} 
+    insert bee  OK        0:{} 1:{bee} 2:{} 3:{} 4:{} 5:{ant} 
+    insert cat  OK        0:{} 1:{bee} 2:{cat} 3:{} 4:{} 5:{ant} 
+    insert dog  OK        0:{dog} 1:{bee} 2:{cat} 3:{} 4:{} 5:{ant} 
+    insert eel  OK        0:{dog} 1:{bee} 2:{cat} 3:{} 4:{eel} 5:{ant} 
+    insert fox  OK        0:{dog,fox} 1:{bee} 2:{cat} 3:{} 4:{eel} 5:{ant} 
+  k=2 cap=1
+    insert ant  OK        0:{} 1:{} 2:{} 3:{} 4:{} 5:{ant} 
+    insert bee  OK        0:{} 1:{bee} 2:{} 3:{} 4:{} 5:{ant} 
+    insert cat  OK        0:{} 1:{bee} 2:{cat} 3:{} 4:{} 5:{ant} 
+    insert dog  OK        0:{dog} 1:{bee} 2:{cat} 3:{} 4:{} 5:{ant} 
+    insert eel  OK        0:{dog} 1:{bee} 2:{cat} 3:{} 4:{eel} 5:{ant} 
+    insert fox  INTERNAL  0:{dog} 1:{bee} 2:{cat} 3:{} 4:{eel} 5:{ant} 
+      message: "Cannot insert element: maximum bucket size reached"
+  k=2 cap=2
+    insert ant  OK        0:{} 1:{} 2:{} 3:{} 4:{} 5:{ant} 
+    insert bee  OK        0:{} 1:{bee} 2:{} 3:{} 4:{} 5:{ant} 
+    insert cat  OK        0:{} 1:{bee} 2:{cat} 3:{} 4:{} 5:{ant} 
+    insert dog  OK        0:{dog} 1:{bee} 2:{cat} 3:{} 4:{} 5:{ant} 
+    insert eel  OK        0:{dog} 1:{bee} 2:{cat} 3:{} 4:{eel} 5:{ant} 
+    insert fox  OK        0:{dog,fox} 1:{bee} 2:{cat} 3:{} 4:{eel} 5:{ant} 
+  k=3 cap=unlimited
+    insert ant  OK        0:{} 1:{} 2:{} 3:{} 4:{} 5:{ant} 
+    insert bee  OK        0:{} 1:{bee} 2:{} 3:{} 4:{} 5:{ant} 
+    insert cat  OK        0:{} 1:{bee} 2:{cat} 3:{} 4:{} 5:{ant} 
+    insert dog  OK        0:{dog} 1:{bee} 2:{cat} 3:{} 4:{} 5:{ant} 
+    insert eel  OK        0:{dog} 1:{bee} 2:{cat} 3:{} 4:{eel} 5:{ant} 
+    insert fox  OK        0:{dog,fox} 1:{bee} 2:{cat} 3:{} 4:{eel} 5:{ant} 
+  k=3 cap=1
+    insert ant  OK        0:{} 1:{} 2:{} 3:{} 4:{} 5:{ant} 
+    insert bee  OK        0:{} 1:{bee} 2:{} 3:{} 4:{} 5:{ant} 
+    insert cat  OK        0:{} 1:{bee} 2:{cat} 3:{} 4:{} 5:{ant} 
+    insert dog  OK        0:{dog} 1:{bee} 2:{cat} 3:{} 4:{} 5:{ant} 
+    insert eel  OK        0:{dog} 1:{bee} 2:{cat} 3:{} 4:{eel} 5:{ant} 
+    insert fox  INTERNAL  0:{dog} 1:{bee} 2:{cat} 3:{} 4:{eel} 5:{ant} 
+      message: "Cannot insert element: maximum bucket size reached"
+  k=3 cap=2
+    insert ant  OK        0:{} 1:{} 2:{} 3:{} 4:{} 5:{ant} 
+    insert bee  OK        0:{} 1:{bee} 2:{} 3:{} 4:{} 5:{ant} 
+    insert cat  OK        0:{} 1:{bee} 2:{cat} 3:{} 4:{} 5:{ant} 
+    insert dog  OK        0:{dog} 1:{bee} 2:{cat} 3:{} 4:{} 5:{ant} 
+    insert eel  OK        0:{dog} 1:{bee} 2:{cat} 3:{} 4:{eel} 5:{ant} 
+    insert fox  OK        0:{dog,fox} 1:{bee} 2:{cat} 3:{} 4:{eel} 5:{ant} 
+
+================ 11. SimpleHashTable, m = 6 ================
+  k=1
+    after ant  0:{} 1:{} 2:{} 3:{} 4:{} 5:{ant} 
+    after bee  0:{} 1:{} 2:{} 3:{} 4:{} 5:{ant,bee} 
+    after cat  0:{} 1:{} 2:{cat} 3:{} 4:{} 5:{ant,bee} 
+  k=2
+    after ant  0:{ant} 1:{} 2:{} 3:{} 4:{} 5:{ant} 
+    after bee  0:{ant} 1:{bee} 2:{} 3:{} 4:{} 5:{ant,bee} 
+    after cat  0:{ant} 1:{bee} 2:{cat} 3:{} 4:{} 5:{ant,bee,cat} 
+  k=3
+    after ant  0:{ant,ant} 1:{} 2:{} 3:{} 4:{} 5:{ant} 
+    after bee  0:{ant,ant,bee} 1:{bee} 2:{} 3:{} 4:{} 5:{ant,bee} 
+    after cat  0:{ant,ant,bee,cat} 1:{bee} 2:{cat} 3:{} 4:{} 5:{ant,bee,cat} 
+
+================ 12. SimpleHashTable capacity check with duplicate candidates ================
+  m=2: "bee" has h0 = h1 = 1
+    cap=2 bucket 1: 1 -> 3 on inserting "bee" (OK)   <-- over capacity
+    cap=3 bucket 1: 2 -> 4 on inserting "bee" (OK)   <-- over capacity
+    cap=4 bucket 1: 3 -> 5 on inserting "bee" (OK)   <-- over capacity
+  m=3: "cat" has h0 = h1 = 2
+    cap=2 bucket 2: 1 -> 3 on inserting "cat" (OK)   <-- over capacity
+    cap=3 bucket 2: 2 -> 4 on inserting "cat" (OK)   <-- over capacity
+    cap=4 bucket 2: 3 -> 5 on inserting "cat" (OK)   <-- over capacity
+  m=4: "gnu" has h0 = h1 = 1
+    cap=2 bucket 1: 1 -> 3 on inserting "gnu" (OK)   <-- over capacity
+    cap=3 bucket 1: 2 -> 4 on inserting "gnu" (OK)   <-- over capacity
+    cap=4 bucket 1: 3 -> 5 on inserting "gnu" (OK)   <-- over capacity
+  m=5: "ant" has h0 = h1 = 0
+    cap=2 bucket 0: 1 -> 3 on inserting "ant" (OK)   <-- over capacity
+    cap=3 bucket 0: 2 -> 4 on inserting "ant" (OK)   <-- over capacity
+    cap=4 bucket 0: 3 -> 5 on inserting "ant" (OK)   <-- over capacity
+  m=6: "dog" has h0 = h1 = 0
+    cap=2 bucket 0: 1 -> 3 on inserting "dog" (OK)   <-- over capacity
+    cap=3 bucket 0: 2 -> 4 on inserting "dog" (OK)   <-- over capacity
+  m=8: "newt" has h0 = h1 = 6
+    cap=2 bucket 6: 1 -> 3 on inserting "newt" (OK)   <-- over capacity
+    cap=3 bucket 6: 2 -> 4 on inserting "newt" (OK)   <-- over capacity
+    cap=4 bucket 6: 3 -> 5 on inserting "newt" (OK)   <-- over capacity
+  m=9: "cat" has h0 = h1 = 5
+    cap=2 bucket 5: 1 -> 3 on inserting "cat" (OK)   <-- over capacity
+  m=10: "mole" has h0 = h1 = 7
+    cap=2 bucket 7: 1 -> 3 on inserting "mole" (OK)   <-- over capacity
+    cap=3 bucket 7: 2 -> 4 on inserting "mole" (OK)   <-- over capacity
+    cap=4 bucket 7: 3 -> 5 on inserting "mole" (OK)   <-- over capacity
+  m=12: "newt" has h0 = h1 = 10
+    cap=2 bucket 10: 1 -> 3 on inserting "newt" (OK)   <-- over capacity
+  m=13: "pig" has h0 = h1 = 7
+    cap=2 bucket 7: 1 -> 3 on inserting "pig" (OK)   <-- over capacity
+    cap=3 bucket 7: 2 -> 4 on inserting "pig" (OK)   <-- over capacity
+  m=15: "newt" has h0 = h1 = 4
+    cap=2 bucket 4: 1 -> 3 on inserting "newt" (OK)   <-- over capacity
+    cap=3 bucket 4: 2 -> 4 on inserting "newt" (OK)   <-- over capacity
+
+================ 13. production parameter arithmetic ================
+  n=1    -> num_buckets = int64(1.5 * 1) = 1, max_relocations = 1
+  n=2    -> num_buckets = int64(1.5 * 2) = 3, max_relocations = 2
+  n=3    -> num_buckets = int64(1.5 * 3) = 4, max_relocations = 3
+  n=4    -> num_buckets = int64(1.5 * 4) = 6, max_relocations = 4
+  n=5    -> num_buckets = int64(1.5 * 5) = 7, max_relocations = 5
+  n=7    -> num_buckets = int64(1.5 * 7) = 10, max_relocations = 7
+  n=10   -> num_buckets = int64(1.5 * 10) = 15, max_relocations = 10
+  n=100  -> num_buckets = int64(1.5 * 100) = 150, max_relocations = 100
+
+[explore] done

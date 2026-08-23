@@ -1,0 +1,9 @@
+{
+  "name": "cuckoo-hashing-qa",
+  "private": true,
+  "description": "Quality gates for the site: accessibility, keyboard reach, reduced motion, load time. Not part of the published site.",
+  "devDependencies": {
+    "lighthouse": "12.8.2",
+    "playwright": "1.62.1"
+  }
+}

@@ -1,0 +1,28 @@
+<!DOCTYPE html><html><head><meta charset="utf-8">
+<title>overflow measurement</title></head><body>
+<p id="result">running</p>
+<iframe id="f" style="border:0" title="site under test"></iframe>
+<script>
+// Load the site in an iframe sized to the requested viewport and report whether
+// anything overflows horizontally. A development aid; never part of the site.
+const q = new URLSearchParams(location.search);
+const w = Number(q.get('w') || 390);
+const f = document.getElementById('f');
+f.style.width = w + 'px';
+f.style.height = '1800px';
+f.src = 'index.html' + (q.get('r') || '#/table');
+f.onload = () => setTimeout(() => {
+  try {
+    const d = f.contentDocument;
+    const de = d.documentElement;
+    const over = de.scrollWidth - w;
+    const wide = [...d.querySelectorAll('body *')]
+      .filter((e) => e.scrollWidth > w + 2 && getComputedStyle(e).overflowX !== 'auto')
+      .map((e) => e.tagName + '.' + (typeof e.className === 'string' ? e.className : '?'))
+      .slice(0, 5);
+    document.getElementById('result').textContent = over > 2
+      ? `FAIL overflow ${over}px ${wide.join(' ')}`
+      : `ok (scrollWidth ${de.scrollWidth} <= ${w})`;
+  } catch (e) { document.getElementById('result').textContent = 'FAIL ' + e.message; }
+}, 3000);
+</script></body></html>

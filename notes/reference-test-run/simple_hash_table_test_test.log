@@ -1,0 +1,25 @@
+exec ${PAGER:-/usr/bin/less} "$0" || exit 1
+Executing tests from //pir/hashing:simple_hash_table_test
+-----------------------------------------------------------------------------
+Running main() from gmock_main.cc
+[==========] Running 5 tests from 2 test suites.
+[----------] Global test environment set-up.
+[----------] 2 tests from SimpleHashTableTest
+[ RUN      ] SimpleHashTableTest.TestInsert
+[       OK ] SimpleHashTableTest.TestInsert (20 ms)
+[ RUN      ] SimpleHashTableTest.TestOverflow
+[       OK ] SimpleHashTableTest.TestOverflow (0 ms)
+[----------] 2 tests from SimpleHashTableTest (20 ms total)
+
+[----------] 3 tests from SimpleHashTable
+[ RUN      ] SimpleHashTable.FailsIfNumBucketsNegative
+[       OK ] SimpleHashTable.FailsIfNumBucketsNegative (0 ms)
+[ RUN      ] SimpleHashTable.FailsIfNumHashZero
+[       OK ] SimpleHashTable.FailsIfNumHashZero (0 ms)
+[ RUN      ] SimpleHashTable.FailsIfMaxBucketSizeNegative
+[       OK ] SimpleHashTable.FailsIfMaxBucketSizeNegative (0 ms)
+[----------] 3 tests from SimpleHashTable (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 5 tests from 2 test suites ran. (20 ms total)
+[  PASSED  ] 5 tests.

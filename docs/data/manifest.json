@@ -1,0 +1,751 @@
+{
+ "schemaVersion": 1,
+ "derivedFrom": {
+  "referenceCommit": "859cafa71fc1e139c7b76d4d4c0f23438688a8ad",
+  "referenceCommitDate": "2026-01-05T12:12:54-08:00",
+  "note": "There is no build timestamp here on purpose. Every byte under docs/data/ is a function of the pinned inputs, so two clean checkouts produce the same tree and the continuous-integration diff has something to prove."
+ },
+ "reference": {
+  "repo": "https://github.com/google/distributed_point_functions",
+  "commit": "859cafa71fc1e139c7b76d4d4c0f23438688a8ad",
+  "commitShort": "859cafa71fc1",
+  "license": "Apache-2.0",
+  "module": "pir/hashing",
+  "note": "Google's open-source cuckoo hashing lives here, not in google/private-join-and-compute. See notes/FIDELITY.md section 0.",
+  "files": {
+   "MODULE.bazel": {
+    "bytes": 2871,
+    "permalink": "https://github.com/google/distributed_point_functions/blob/859cafa71fc1e139c7b76d4d4c0f23438688a8ad/MODULE.bazel",
+    "sha256": "ee8be8429a6fbc2b75bdc8df056cbe202a37d5c4e28bcd2c291c4a4663be5ebc"
+   },
+   "pir/cuckoo_hashed_dpf_pir_database.cc": {
+    "bytes": 7211,
+    "permalink": "https://github.com/google/distributed_point_functions/blob/859cafa71fc1e139c7b76d4d4c0f23438688a8ad/pir/cuckoo_hashed_dpf_pir_database.cc",
+    "sha256": "fb17c87d465656553af04205916926fd7a0ced14c4acd7fc64d9c527474eaf27"
+   },
+   "pir/cuckoo_hashing_sparse_dpf_pir_client.cc": {
+    "bytes": 8932,
+    "permalink": "https://github.com/google/distributed_point_functions/blob/859cafa71fc1e139c7b76d4d4c0f23438688a8ad/pir/cuckoo_hashing_sparse_dpf_pir_client.cc",
+    "sha256": "41ebd8ea092bca50e046eaa7741bee82c42aaccb6254d1449b523e454fa6c20b"
+   },
+   "pir/cuckoo_hashing_sparse_dpf_pir_server.cc": {
+    "bytes": 7604,
+    "permalink": "https://github.com/google/distributed_point_functions/blob/859cafa71fc1e139c7b76d4d4c0f23438688a8ad/pir/cuckoo_hashing_sparse_dpf_pir_server.cc",
+    "sha256": "447f1774250e9b2520e0015677549cb33639bb48bb82129ca58ad9b6e7ae93a5"
+   },
+   "pir/cuckoo_hashing_sparse_dpf_pir_server.h": {
+    "bytes": 5538,
+    "permalink": "https://github.com/google/distributed_point_functions/blob/859cafa71fc1e139c7b76d4d4c0f23438688a8ad/pir/cuckoo_hashing_sparse_dpf_pir_server.h",
+    "sha256": "108686814d4dfc9cfe436cbca4329866ed62a0d047c6f4198396eec8e96f31d8"
+   },
+   "pir/hashing/BUILD": {
+    "bytes": 7817,
+    "permalink": "https://github.com/google/distributed_point_functions/blob/859cafa71fc1e139c7b76d4d4c0f23438688a8ad/pir/hashing/BUILD",
+    "sha256": "6019800beb162122c475917e0f662cc4d50c1a854bf826ce9bb96492c0f9c93f"
+   },
+   "pir/hashing/cuckoo_hash_table.cc": {
+    "bytes": 3409,
+    "permalink": "https://github.com/google/distributed_point_functions/blob/859cafa71fc1e139c7b76d4d4c0f23438688a8ad/pir/hashing/cuckoo_hash_table.cc",
+    "sha256": "2928ee62b76129932641a1c99ac3e9ec99067acd4a968eddb59121487d2f340d"
+   },
+   "pir/hashing/cuckoo_hash_table.h": {
+    "bytes": 4485,
+    "permalink": "https://github.com/google/distributed_point_functions/blob/859cafa71fc1e139c7b76d4d4c0f23438688a8ad/pir/hashing/cuckoo_hash_table.h",
+    "sha256": "5ae9ac5ddaf710317e44a6c73c97dc43f4f8781f6c1d97f5ddc8b385887fd7ea"
+   },
+   "pir/hashing/cuckoo_hash_table_test.cc": {
+    "bytes": 6278,
+    "permalink": "https://github.com/google/distributed_point_functions/blob/859cafa71fc1e139c7b76d4d4c0f23438688a8ad/pir/hashing/cuckoo_hash_table_test.cc",
+    "sha256": "323ea09df752fdae9ea9fb6d48de1546ebcc8a15db32e403487a5dac1d04868d"
+   },
+   "pir/hashing/farm_hash_family.cc": {
+    "bytes": 1141,
+    "permalink": "https://github.com/google/distributed_point_functions/blob/859cafa71fc1e139c7b76d4d4c0f23438688a8ad/pir/hashing/farm_hash_family.cc",
+    "sha256": "5d6265b7396430e055d9d32dfffe2d84bcaedba5f6473a4dc8ac485c24b14007"
+   },
+   "pir/hashing/farm_hash_family.h": {
+    "bytes": 1476,
+    "permalink": "https://github.com/google/distributed_point_functions/blob/859cafa71fc1e139c7b76d4d4c0f23438688a8ad/pir/hashing/farm_hash_family.h",
+    "sha256": "9548736901f05944526cc3e4dbd0a74f7c1db0725ea46d8f4cd856b657fb13d4"
+   },
+   "pir/hashing/hash_family.cc": {
+    "bytes": 1336,
+    "permalink": "https://github.com/google/distributed_point_functions/blob/859cafa71fc1e139c7b76d4d4c0f23438688a8ad/pir/hashing/hash_family.cc",
+    "sha256": "a421c1e9ccf40a5fa1b7d4c6f03b699432bdf67282628da5ec31aca2c58810e0"
+   },
+   "pir/hashing/hash_family.h": {
+    "bytes": 2428,
+    "permalink": "https://github.com/google/distributed_point_functions/blob/859cafa71fc1e139c7b76d4d4c0f23438688a8ad/pir/hashing/hash_family.h",
+    "sha256": "5fa658b68d0941f327a31bdd4e444d40a10962438015d0b600a5d5d50b24afb7"
+   },
+   "pir/hashing/hash_family_config.cc": {
+    "bytes": 1608,
+    "permalink": "https://github.com/google/distributed_point_functions/blob/859cafa71fc1e139c7b76d4d4c0f23438688a8ad/pir/hashing/hash_family_config.cc",
+    "sha256": "bc84b7af2e2eb67b207515507826f726823c267ca5833028d1367254651c7d73"
+   },
+   "pir/hashing/hash_family_config.h": {
+    "bytes": 1238,
+    "permalink": "https://github.com/google/distributed_point_functions/blob/859cafa71fc1e139c7b76d4d4c0f23438688a8ad/pir/hashing/hash_family_config.h",
+    "sha256": "103bb7f0887a3bf1dc50c97d766894a25023d3f268a58d4cfc1e25e42a3541d7"
+   },
+   "pir/hashing/hash_family_config.proto": {
+    "bytes": 1195,
+    "permalink": "https://github.com/google/distributed_point_functions/blob/859cafa71fc1e139c7b76d4d4c0f23438688a8ad/pir/hashing/hash_family_config.proto",
+    "sha256": "10d77a1a70ec9bfba5534e78562eb100b7f41d13d3cc93bf4f5d4cd3516134c9"
+   },
+   "pir/hashing/hash_family_test.cc": {
+    "bytes": 2330,
+    "permalink": "https://github.com/google/distributed_point_functions/blob/859cafa71fc1e139c7b76d4d4c0f23438688a8ad/pir/hashing/hash_family_test.cc",
+    "sha256": "d6e5c4a8b0d0490610865bf0844e24bb664db87a130f3f58d1f4e74fd1208a3a"
+   },
+   "pir/hashing/multiple_choice_hash_table.cc": {
+    "bytes": 2708,
+    "permalink": "https://github.com/google/distributed_point_functions/blob/859cafa71fc1e139c7b76d4d4c0f23438688a8ad/pir/hashing/multiple_choice_hash_table.cc",
+    "sha256": "14443592e5f012db6ab82c376484b24d4892c8b784ec068b2b88546dc08bc9b8"
+   },
+   "pir/hashing/multiple_choice_hash_table.h": {
+    "bytes": 3374,
+    "permalink": "https://github.com/google/distributed_point_functions/blob/859cafa71fc1e139c7b76d4d4c0f23438688a8ad/pir/hashing/multiple_choice_hash_table.h",
+    "sha256": "a232631cd6a581da5ba67116fc20446e54084db863cb834024e3052639708d3a"
+   },
+   "pir/hashing/multiple_choice_hash_table_test.cc": {
+    "bytes": 3874,
+    "permalink": "https://github.com/google/distributed_point_functions/blob/859cafa71fc1e139c7b76d4d4c0f23438688a8ad/pir/hashing/multiple_choice_hash_table_test.cc",
+    "sha256": "2eaa08bb3949ad2a210af09ee690305a867ed9fabfb2b837329eceeb4c739e9f"
+   },
+   "pir/hashing/sha256_hash_family.cc": {
+    "bytes": 3088,
+    "permalink": "https://github.com/google/distributed_point_functions/blob/859cafa71fc1e139c7b76d4d4c0f23438688a8ad/pir/hashing/sha256_hash_family.cc",
+    "sha256": "531d12f27c373e53be67cdb5939de4f4a2d6c54aeda5b1b0d532d57f21172666"
+   },
+   "pir/hashing/sha256_hash_family.h": {
+    "bytes": 1665,
+    "permalink": "https://github.com/google/distributed_point_functions/blob/859cafa71fc1e139c7b76d4d4c0f23438688a8ad/pir/hashing/sha256_hash_family.h",
+    "sha256": "d31bd1482cfb186ca6137e465d460f52915f0f547fa2a56c4211022a3dd81e69"
+   },
+   "pir/hashing/sha256_hash_family_test.cc": {
+    "bytes": 3208,
+    "permalink": "https://github.com/google/distributed_point_functions/blob/859cafa71fc1e139c7b76d4d4c0f23438688a8ad/pir/hashing/sha256_hash_family_test.cc",
+    "sha256": "a1420f921b8bf3afa484a6f0d5a9d84c2e9d5275c45e47858cc41301f5882d69"
+   },
+   "pir/hashing/simple_hash_table.cc": {
+    "bytes": 2694,
+    "permalink": "https://github.com/google/distributed_point_functions/blob/859cafa71fc1e139c7b76d4d4c0f23438688a8ad/pir/hashing/simple_hash_table.cc",
+    "sha256": "b74d2ea0fbd98b240026f40e061568edd836b45898ecfcfc3eccdb6f33dceafa"
+   },
+   "pir/hashing/simple_hash_table.h": {
+    "bytes": 3421,
+    "permalink": "https://github.com/google/distributed_point_functions/blob/859cafa71fc1e139c7b76d4d4c0f23438688a8ad/pir/hashing/simple_hash_table.h",
+    "sha256": "b6a2b6d2768c0840bbf586686f28a6f5218246224d978be966c1c74fafe8adbf"
+   },
+   "pir/hashing/simple_hash_table_test.cc": {
+    "bytes": 3951,
+    "permalink": "https://github.com/google/distributed_point_functions/blob/859cafa71fc1e139c7b76d4d4c0f23438688a8ad/pir/hashing/simple_hash_table_test.cc",
+    "sha256": "c892d7e33543d802cc075cd05442df6ce892bc9d7c2efe24f643f565b1edf8ee"
+   }
+  }
+ },
+ "toolchain": {
+  "abseil": "20240722.0",
+  "abseilSha256": "f50e5ac311a81382da7fa75b97310e4b9006474f9560ac46f54a9967f07d4ae3",
+  "boringsslPinnedByReference": "0.20240930.0",
+  "protobufPinnedByReference": "29.1",
+  "googletestPinnedByReference": "1.15.2",
+  "farmhashCommit": "0d859a811870d10f53a594927d0d0b97573ad06d",
+  "abseilBuiltFrom": "the pinned source archive, built by tools/01_build.sh into .work/absl-install. No system abseil is used, and the CMake shim fails if it cannot find that one.",
+  "abseilCmakeDir": "<repo>/.work/absl-install/lib/cmake/absl",
+  "compiler": "g++ 13.3.0",
+  "compilerPath": "/usr/bin/c++",
+  "buildType": "Release",
+  "cxxFlags": "-O3 -DNDEBUG -std=c++17 -Wno-deprecated-declarations",
+  "sha256Provider": "OpenSSL 3.0.17 1 Jul 2025 (Library: OpenSSL 3.0.17 1 Jul 2025)",
+  "sha256Library": "/usr/lib/x86_64-linux-gnu/libcrypto.so",
+  "bazelForUpstreamTests": "7.4.1",
+  "sha256Note": "The reference builds against BoringSSL. This build uses OpenSSL's SHA256_Init/Update/Final, which has the same API and produces the same digest. tools/cxx/conformance_test.cc checks the digest against the NIST CAVP vector that the reference's own test uses.",
+  "host": "Linux x86_64",
+  "endianness": "little"
+ },
+ "algorithm": {
+  "rng": "std::mt19937_64, default-constructed, so seed 5489",
+  "indexMapping": "absl::uniform_int_distribution<int>(0, k-1). Its unsigned type is uint32_t, so it uses the low 32 bits of one Mersenne Twister word. A power-of-two k masks; any other k multiplies by k, keeps the high 32 bits, and redraws while the low 32 bits are below 2^32 mod k.",
+  "hash": "SHA-256 of the seed followed by the input. The 32 bytes are read as one little-endian 256-bit integer, then reduced by three divisions in base 2^64.",
+  "production": {
+   "numHashFunctions": 3,
+   "bucketsPerElement": 1.5,
+   "bucketsFormula": "int64(1.5 * num_elements), which truncates",
+   "maxRelocations": "num_records",
+   "maxStashSize": null,
+   "sessionSeedBytes": 16,
+   "stashNote": "The database builder copies only GetTable() into the served database, so a key on the stash cannot be retrieved. The parameters are chosen so the stash stays empty."
+  }
+ },
+ "scenarios": [
+  {
+   "id": "CK-classroom",
+   "structure": "cuckoo",
+   "title": "Four words, six buckets",
+   "teaches": "the core loop: draw, hash, place or evict",
+   "file": "traces/CK-classroom.json",
+   "numBuckets": 6,
+   "numHashFunctions": 3,
+   "maxRelocations": 4,
+   "maxStashSize": null,
+   "maxBucketSize": null,
+   "familySeedHex": "",
+   "numElements": 4,
+   "bytes": 13588,
+   "sha256": "aca2fe2a83c38d81b3198aaaaa088d7492ab265bc6b541aa53bd688fad38b2d2",
+   "provenance": "reference",
+   "contains": {
+    "cleanPlacements": 3,
+    "errors": 0,
+    "finalOccupied": 4,
+    "finalStash": 0,
+    "inserts": 4,
+    "insertsWithOneEviction": 1,
+    "longestEvictionChain": 1,
+    "maxProbesOfOneBucketInAnInsert": 1,
+    "stashPushes": 0,
+    "totalEvictions": 1
+   }
+  },
+  {
+   "id": "CK-first-contact",
+   "structure": "cuckoo",
+   "title": "One clean landing, one eviction",
+   "teaches": "what an insert does when the bucket is free, and when it is not",
+   "file": "traces/CK-first-contact.json",
+   "numBuckets": 4,
+   "numHashFunctions": 2,
+   "maxRelocations": 6,
+   "maxStashSize": null,
+   "maxBucketSize": null,
+   "familySeedHex": "",
+   "numElements": 4,
+   "bytes": 17251,
+   "sha256": "fe8b19019641c1bfa3959374bb6188048b9c697ab8141aeb7a6dd60efef58986",
+   "provenance": "reference",
+   "contains": {
+    "cleanPlacements": 1,
+    "errors": 0,
+    "finalOccupied": 4,
+    "finalStash": 0,
+    "inserts": 4,
+    "insertsWithOneEviction": 1,
+    "longestEvictionChain": 5,
+    "maxProbesOfOneBucketInAnInsert": 5,
+    "stashPushes": 0,
+    "totalEvictions": 10
+   }
+  },
+  {
+   "id": "CK-chain",
+   "structure": "cuckoo",
+   "title": "A long displacement chain",
+   "teaches": "one insert can move several elements before it settles",
+   "file": "traces/CK-chain.json",
+   "numBuckets": 6,
+   "numHashFunctions": 3,
+   "maxRelocations": 8,
+   "maxStashSize": null,
+   "maxBucketSize": null,
+   "familySeedHex": "",
+   "numElements": 6,
+   "bytes": 26287,
+   "sha256": "a9d3ef66e27c87a88cfddeb2f0a9fe9df82ce649b2ba5efff6be03e8ee697ce7",
+   "provenance": "reference",
+   "contains": {
+    "cleanPlacements": 3,
+    "errors": 0,
+    "finalOccupied": 5,
+    "finalStash": 1,
+    "inserts": 6,
+    "insertsWithOneEviction": 1,
+    "longestEvictionChain": 8,
+    "maxProbesOfOneBucketInAnInsert": 4,
+    "stashPushes": 1,
+    "totalEvictions": 15
+   }
+  },
+  {
+   "id": "CK-pingpong",
+   "structure": "cuckoo",
+   "title": "The walk goes back where it came from",
+   "teaches": "a random walk is not a smart walk",
+   "file": "traces/CK-pingpong.json",
+   "numBuckets": 4,
+   "numHashFunctions": 2,
+   "maxRelocations": 6,
+   "maxStashSize": null,
+   "maxBucketSize": null,
+   "familySeedHex": "",
+   "numElements": 4,
+   "bytes": 11832,
+   "sha256": "32a6228673071a490599e5c297fb8f82b5d82030d5deed9a22f76314680edee8",
+   "provenance": "reference",
+   "contains": {
+    "cleanPlacements": 3,
+    "errors": 0,
+    "finalOccupied": 3,
+    "finalStash": 1,
+    "inserts": 4,
+    "insertsWithOneEviction": 0,
+    "longestEvictionChain": 6,
+    "maxProbesOfOneBucketInAnInsert": 4,
+    "stashPushes": 1,
+    "totalEvictions": 6
+   }
+  },
+  {
+   "id": "CK-stash",
+   "structure": "cuckoo",
+   "title": "The relocation budget runs out",
+   "teaches": "the stash is the reference's answer to a failed walk",
+   "file": "traces/CK-stash.json",
+   "numBuckets": 6,
+   "numHashFunctions": 3,
+   "maxRelocations": 2,
+   "maxStashSize": null,
+   "maxBucketSize": null,
+   "familySeedHex": "",
+   "numElements": 5,
+   "bytes": 10458,
+   "sha256": "ab4c1baf417767378d14e7b1b92c9297b7fd34f5673c361326cc20b6064f2167",
+   "provenance": "reference",
+   "contains": {
+    "cleanPlacements": 3,
+    "errors": 0,
+    "finalOccupied": 4,
+    "finalStash": 1,
+    "inserts": 5,
+    "insertsWithOneEviction": 1,
+    "longestEvictionChain": 2,
+    "maxProbesOfOneBucketInAnInsert": 2,
+    "stashPushes": 1,
+    "totalEvictions": 3
+   }
+  },
+  {
+   "id": "CK-stash-full",
+   "structure": "cuckoo",
+   "title": "The only hard failure",
+   "teaches": "a bounded stash turns overflow into an error",
+   "file": "traces/CK-stash-full.json",
+   "numBuckets": 4,
+   "numHashFunctions": 2,
+   "maxRelocations": 2,
+   "maxStashSize": 1,
+   "maxBucketSize": null,
+   "familySeedHex": "",
+   "numElements": 6,
+   "bytes": 11523,
+   "sha256": "faab3bf61623b60eed3ee9dca2e3e06a62ea9bbc34b16281e86391722174fd96",
+   "provenance": "reference",
+   "contains": {
+    "cleanPlacements": 4,
+    "errors": 1,
+    "finalOccupied": 4,
+    "finalStash": 1,
+    "inserts": 6,
+    "insertsWithOneEviction": 0,
+    "longestEvictionChain": 2,
+    "maxProbesOfOneBucketInAnInsert": 2,
+    "stashPushes": 1,
+    "totalEvictions": 4
+   }
+  },
+  {
+   "id": "CK-budget-zero",
+   "structure": "cuckoo",
+   "title": "A budget of zero",
+   "teaches": "max_relocations = 0 sends every element straight to the stash",
+   "file": "traces/CK-budget-zero.json",
+   "numBuckets": 6,
+   "numHashFunctions": 3,
+   "maxRelocations": 0,
+   "maxStashSize": null,
+   "maxBucketSize": null,
+   "familySeedHex": "",
+   "numElements": 3,
+   "bytes": 2043,
+   "sha256": "2208134bae851cad88db836e146a8cededf0a046b3915ce28c7840b4d6d20218",
+   "provenance": "reference",
+   "contains": {
+    "cleanPlacements": 0,
+    "errors": 0,
+    "finalOccupied": 0,
+    "finalStash": 3,
+    "inserts": 3,
+    "insertsWithOneEviction": 0,
+    "longestEvictionChain": 0,
+    "maxProbesOfOneBucketInAnInsert": 0,
+    "stashPushes": 3,
+    "totalEvictions": 0
+   }
+  },
+  {
+   "id": "CK-duplicate",
+   "structure": "cuckoo",
+   "title": "The same key twice",
+   "teaches": "the reference has no membership test, so a key can occupy two slots",
+   "file": "traces/CK-duplicate.json",
+   "numBuckets": 6,
+   "numHashFunctions": 3,
+   "maxRelocations": 4,
+   "maxStashSize": null,
+   "maxBucketSize": null,
+   "familySeedHex": "",
+   "numElements": 3,
+   "bytes": 9151,
+   "sha256": "c31edd4b327b4b62111d672ec091f0e8b4d2cc4bd2db6db20b15446d2cfafbd5",
+   "provenance": "reference",
+   "contains": {
+    "cleanPlacements": 2,
+    "errors": 0,
+    "finalOccupied": 3,
+    "finalStash": 0,
+    "inserts": 3,
+    "insertsWithOneEviction": 1,
+    "longestEvictionChain": 1,
+    "maxProbesOfOneBucketInAnInsert": 1,
+    "stashPushes": 0,
+    "totalEvictions": 1
+   }
+  },
+  {
+   "id": "CK-order-a",
+   "structure": "cuckoo",
+   "title": "Four words, one order",
+   "teaches": "the build is deterministic once the order is fixed",
+   "file": "traces/CK-order-a.json",
+   "numBuckets": 6,
+   "numHashFunctions": 3,
+   "maxRelocations": 4,
+   "maxStashSize": null,
+   "maxBucketSize": null,
+   "familySeedHex": "",
+   "numElements": 4,
+   "bytes": 11417,
+   "sha256": "588759423c6e0e7f4b53e8b47dabfe9843fb49a25a89aa5d55a552e231de91c7",
+   "provenance": "reference",
+   "contains": {
+    "cleanPlacements": 2,
+    "errors": 0,
+    "finalOccupied": 3,
+    "finalStash": 1,
+    "inserts": 4,
+    "insertsWithOneEviction": 1,
+    "longestEvictionChain": 4,
+    "maxProbesOfOneBucketInAnInsert": 4,
+    "stashPushes": 1,
+    "totalEvictions": 5
+   }
+  },
+  {
+   "id": "CK-order-b",
+   "structure": "cuckoo",
+   "title": "The same four words, another order",
+   "teaches": "the same set of keys, a different table",
+   "file": "traces/CK-order-b.json",
+   "numBuckets": 6,
+   "numHashFunctions": 3,
+   "maxRelocations": 4,
+   "maxStashSize": null,
+   "maxBucketSize": null,
+   "familySeedHex": "",
+   "numElements": 4,
+   "bytes": 10204,
+   "sha256": "d6ca490c7a2bff3f99fc68147eb70f659201f881cb08a3a008f17f09f042c426",
+   "provenance": "reference",
+   "contains": {
+    "cleanPlacements": 3,
+    "errors": 0,
+    "finalOccupied": 3,
+    "finalStash": 1,
+    "inserts": 4,
+    "insertsWithOneEviction": 0,
+    "longestEvictionChain": 4,
+    "maxProbesOfOneBucketInAnInsert": 2,
+    "stashPushes": 1,
+    "totalEvictions": 4
+   }
+  },
+  {
+   "id": "CK-degenerate",
+   "structure": "cuckoo",
+   "title": "One bucket, two hash functions",
+   "teaches": "what the validation permits, and what then happens",
+   "file": "traces/CK-degenerate.json",
+   "numBuckets": 1,
+   "numHashFunctions": 2,
+   "maxRelocations": 4,
+   "maxStashSize": null,
+   "maxBucketSize": null,
+   "familySeedHex": "",
+   "numElements": 2,
+   "bytes": 6726,
+   "sha256": "967ba563b6bc8f66e83e59cfedb33b6041c760db6fef0dd65403a74e80a35990",
+   "provenance": "reference",
+   "contains": {
+    "cleanPlacements": 1,
+    "errors": 0,
+    "finalOccupied": 1,
+    "finalStash": 1,
+    "inserts": 2,
+    "insertsWithOneEviction": 0,
+    "longestEvictionChain": 4,
+    "maxProbesOfOneBucketInAnInsert": 4,
+    "stashPushes": 1,
+    "totalEvictions": 4
+   }
+  },
+  {
+   "id": "CK-dense",
+   "structure": "cuckoo",
+   "title": "A table that is nearly full",
+   "teaches": "how the walk lengthens as the load factor climbs",
+   "file": "traces/CK-dense.json",
+   "numBuckets": 8,
+   "numHashFunctions": 3,
+   "maxRelocations": 8,
+   "maxStashSize": null,
+   "maxBucketSize": null,
+   "familySeedHex": "",
+   "numElements": 8,
+   "bytes": 35656,
+   "sha256": "3a2dbaf60f55dc2ff0d4993e7cf52c6ed80be11a6fb5bfc1aef4c571fd37f472",
+   "provenance": "reference",
+   "contains": {
+    "cleanPlacements": 2,
+    "errors": 0,
+    "finalOccupied": 7,
+    "finalStash": 1,
+    "inserts": 8,
+    "insertsWithOneEviction": 1,
+    "longestEvictionChain": 8,
+    "maxProbesOfOneBucketInAnInsert": 7,
+    "stashPushes": 1,
+    "totalEvictions": 20
+   }
+  },
+  {
+   "id": "CK-production",
+   "structure": "cuckoo",
+   "title": "The production recipe, at eight elements",
+   "teaches": "k = 3, buckets = 1.5 x n, budget = n, an unlimited stash",
+   "file": "traces/CK-production.json",
+   "numBuckets": 12,
+   "numHashFunctions": 3,
+   "maxRelocations": 8,
+   "maxStashSize": null,
+   "maxBucketSize": null,
+   "familySeedHex": "",
+   "numElements": 8,
+   "bytes": 28985,
+   "sha256": "7c6eabd6b8a49971b7de3292cd9f1152a13f8ec82923ffbf7db3edc198040547",
+   "provenance": "reference",
+   "contains": {
+    "cleanPlacements": 4,
+    "errors": 0,
+    "finalOccupied": 8,
+    "finalStash": 0,
+    "inserts": 8,
+    "insertsWithOneEviction": 2,
+    "longestEvictionChain": 4,
+    "maxProbesOfOneBucketInAnInsert": 3,
+    "stashPushes": 0,
+    "totalEvictions": 8
+   }
+  },
+  {
+   "id": "CK-seeded",
+   "structure": "cuckoo",
+   "title": "The same recipe with a session seed",
+   "teaches": "in production every hash function is seeded with 16 shared bytes",
+   "file": "traces/CK-seeded.json",
+   "numBuckets": 12,
+   "numHashFunctions": 3,
+   "maxRelocations": 8,
+   "maxStashSize": null,
+   "maxBucketSize": null,
+   "familySeedHex": "000102030405060708090a0b0c0d0e0f",
+   "numElements": 8,
+   "bytes": 28623,
+   "sha256": "17a76dc12d03ca1c6d8d2d22da2dd85827e76083dad5fdc94a409ea6fecc7235",
+   "provenance": "reference",
+   "contains": {
+    "cleanPlacements": 4,
+    "errors": 0,
+    "finalOccupied": 8,
+    "finalStash": 0,
+    "inserts": 8,
+    "insertsWithOneEviction": 2,
+    "longestEvictionChain": 4,
+    "maxProbesOfOneBucketInAnInsert": 3,
+    "stashPushes": 0,
+    "totalEvictions": 8
+   }
+  },
+  {
+   "id": "CK-test-preset",
+   "structure": "cuckoo",
+   "title": "The unit test's own parameters",
+   "teaches": "the same shape at a size that no longer fits on one screen",
+   "file": "traces/CK-test-preset.json",
+   "numBuckets": 100,
+   "numHashFunctions": 3,
+   "maxRelocations": 50,
+   "maxStashSize": 3,
+   "maxBucketSize": null,
+   "familySeedHex": "",
+   "numElements": 96,
+   "bytes": 1135947,
+   "sha256": "d25f8bf04b64a82a1360c46b212c898b9b6b223beb7f5d8dbd18fe35d496e879",
+   "provenance": "reference",
+   "contains": {
+    "cleanPlacements": 50,
+    "errors": 2,
+    "finalOccupied": 91,
+    "finalStash": 3,
+    "inserts": 96,
+    "insertsWithOneEviction": 7,
+    "longestEvictionChain": 50,
+    "maxProbesOfOneBucketInAnInsert": 9,
+    "stashPushes": 3,
+    "totalEvictions": 631
+   }
+  },
+  {
+   "id": "MC-least-loaded",
+   "structure": "multiple_choice",
+   "title": "The least loaded of two buckets",
+   "teaches": "d-choice hashing compares counts and never evicts",
+   "file": "traces/MC-least-loaded.json",
+   "numBuckets": 6,
+   "numHashFunctions": 2,
+   "maxRelocations": 0,
+   "maxStashSize": null,
+   "maxBucketSize": null,
+   "familySeedHex": "",
+   "numElements": 6,
+   "bytes": 11892,
+   "sha256": "4a3a1e8d0f8dcef37c67d9ea27895723f2bae29f026c2abc5d7e8dd423c740c9",
+   "provenance": "reference"
+  },
+  {
+   "id": "MC-bucket-full",
+   "structure": "multiple_choice",
+   "title": "Every candidate is full",
+   "teaches": "the capacity failure of a bucketed table",
+   "file": "traces/MC-bucket-full.json",
+   "numBuckets": 4,
+   "numHashFunctions": 2,
+   "maxRelocations": 0,
+   "maxStashSize": null,
+   "maxBucketSize": 2,
+   "familySeedHex": "",
+   "numElements": 7,
+   "bytes": 13692,
+   "sha256": "f71d7c33bad4e1e278a804b4ad104e6a51bfb599f6e2ce0ffb5c71f24a946f5e",
+   "provenance": "reference"
+  },
+  {
+   "id": "SH-fanout",
+   "structure": "simple",
+   "title": "One element, k copies",
+   "teaches": "the server side of a PIR protocol stores every candidate",
+   "file": "traces/SH-fanout.json",
+   "numBuckets": 6,
+   "numHashFunctions": 3,
+   "maxRelocations": 0,
+   "maxStashSize": null,
+   "maxBucketSize": null,
+   "familySeedHex": "",
+   "numElements": 3,
+   "bytes": 10117,
+   "sha256": "ec748c026702469b4ec846b01a13d8328edfa878131888fda6010864f3c9cbd7",
+   "provenance": "reference"
+  },
+  {
+   "id": "SH-overflow",
+   "structure": "simple",
+   "title": "A capacity test that runs twice",
+   "teaches": "why the exact order of the two loops matters",
+   "file": "traces/SH-overflow.json",
+   "numBuckets": 6,
+   "numHashFunctions": 2,
+   "maxRelocations": 0,
+   "maxStashSize": null,
+   "maxBucketSize": 2,
+   "familySeedHex": "",
+   "numElements": 2,
+   "bytes": 4806,
+   "sha256": "1bf2cda113ec5df8d398aba441f5ad48263728690c7a8c0d1f49d072ef145981",
+   "provenance": "reference"
+  }
+ ],
+ "planReconciliation": {
+  "planScenarioIds": 17,
+  "traceFiles": 19,
+  "oneToOne": [
+   "CK-first-contact",
+   "CK-classroom",
+   "CK-chain",
+   "CK-pingpong",
+   "CK-duplicate",
+   "CK-stash",
+   "CK-stash-full",
+   "CK-budget-zero",
+   "CK-degenerate",
+   "CK-test-preset",
+   "MC-least-loaded",
+   "MC-bucket-full",
+   "SH-fanout",
+   "SH-overflow"
+  ],
+  "split": {
+   "CK-order-matters": {
+    "files": [
+     "CK-order-a",
+     "CK-order-b"
+    ],
+    "why": "The plan describes one scenario holding two orders of the same four words. Two orders are two runs of the reference, so they are two recordings. The tour puts them side by side."
+   }
+  },
+  "foldedIn": {
+   "LK-hit": {
+    "into": "CK-classroom",
+    "why": "A lookup is an operation on a finished table, not a separate build. Looking for \"cat\" is operation 4 of CK-classroom."
+   },
+   "LK-miss": {
+    "into": "CK-classroom",
+    "why": "Looking for \"yak\", which the table does not hold, is operation 5 of CK-classroom."
+   }
+  },
+  "added": {
+   "CK-dense": "A table filled to within one bucket of full, so the walk lengthening with the load factor can be watched rather than only plotted.",
+   "CK-production": "The production recipe at a size a person can follow: k = 3, buckets = int64(1.5 x n), budget = n.",
+   "CK-seeded": "The same recipe with the 16-byte session seed the server generates, so the seeded form of the hash is on the record and not only described."
+  },
+  "provenanceNote": "All nineteen are reference recordings: each one comes from a program that links the unmodified pir/hashing sources. The one extension, textbook mode on the variants page, ships no trace at all; it runs in the browser and is badged."
+ },
+ "extensions": {
+  "textbook-mode": {
+   "where": "#/variants",
+   "what": "Pagh and Rodler's construction: look at every candidate, and on failure make new hash functions and build again.",
+   "isReference": false,
+   "traceFile": null,
+   "computedBy": "docs/js/engine/cuckoo.js runTextbook, in the browser",
+   "badge": "textbook, not the Google reference"
+  }
+ },
+ "default": {
+  "route": "tour",
+  "scenario": "CK-classroom"
+ },
+ "source": {
+  "code": "source/code.json",
+  "license": "source/LICENSE-dpf.txt"
+ },
+ "rngGolden": "rng-golden.json"
+}

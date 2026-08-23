@@ -1,0 +1,50 @@
+cff-version: 1.2.0
+message: "If you use this simulator or its data, please cite it as below."
+title: "Cuckoo Hashing Explorer"
+abstract: "A step-by-step visual simulation of cuckoo hashing, exactly as Google's reference implementation in google/distributed_point_functions computes it."
+type: software
+authors:
+  - family-names: "Al Badawi"
+    given-names: "Ahmad"
+    website: "https://www.ahmadalbadawi.com"
+license: MIT
+date-released: "2026-08-23"
+repository-code: "https://github.com/visuallearn/cuckoo-hash-sim"
+url: "https://visuallearn.github.io/cuckoo-hash-sim/"
+keywords:
+  - "cuckoo hashing"
+  - "hash table"
+  - "private information retrieval"
+  - "private set intersection"
+  - "education"
+references:
+  - type: article
+    title: "Cuckoo Hashing"
+    authors:
+      - family-names: "Pagh"
+        given-names: "Rasmus"
+      - family-names: "Rodler"
+        given-names: "Flemming Friche"
+    journal: "Journal of Algorithms"
+    volume: 51
+    issue: 2
+    year: 2004
+    doi: "10.1016/j.jalgor.2003.12.002"
+  - type: article
+    title: "More Robust Hashing: Cuckoo Hashing with a Stash"
+    authors:
+      - family-names: "Kirsch"
+        given-names: "Adam"
+      - family-names: "Mitzenmacher"
+        given-names: "Michael"
+      - family-names: "Wieder"
+        given-names: "Udi"
+    journal: "SIAM Journal on Computing"
+    volume: 39
+    issue: 4
+    year: 2009
+    doi: "10.1137/080728743"
+  - type: software
+    title: "distributed_point_functions"
+    repository-code: "https://github.com/google/distributed_point_functions"
+    notes: "pir/hashing/ at commit 859cafa71fc1e139c7b76d4d4c0f23438688a8ad, Apache-2.0"

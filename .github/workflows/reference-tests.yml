@@ -1,0 +1,45 @@
+# Run the reference's own unit tests, with its own build system, at the pin.
+#
+# Manual: it fetches the reference and every dependency Bazel needs, which is
+# far too heavy for a push. tools/12_check_mapping.py proves that the
+# conformance suite re-expresses 25 of the 29 cases, and that runs on every
+# regeneration; this workflow is how the other four, and the transcription
+# itself, get checked against the real thing.
+name: Reference test suite
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Quarterly, so a broken pin surfaces before someone needs it.
+    - cron: '41 5 1 */3 *'
+
+jobs:
+  upstream:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      # bazelisk is preinstalled on ubuntu-latest runners and reads
+      # USE_BAZEL_VERSION, which tools/env.sh sets.
+      - name: Fetch the reference at the pin
+        run: ./tools/00_fetch_reference.sh
+
+      - name: Run the reference's own suite
+        run: ./tools/07_run_reference_tests.sh
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: reference-test-run
+          path: notes/reference-test-run/
+
+      - name: Fail if the archived result would change
+        run: |
+          if ! git diff --quiet -- notes/reference-test-run/bazel-test-console.txt; then
+            echo "::notice::the console log changed, which is expected if timings differ"
+          fi
+          grep -q "7 tests pass" notes/reference-test-run/bazel-test-console.txt

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites tests="5" failures="0" disabled="0" errors="0" time="0.005" timestamp="2026-08-23T16:49:32.218" name="AllTests">
+  <testsuite name="MultipleChoiceHashTableTest" tests="2" failures="0" disabled="0" skipped="0" errors="0" time="0.005" timestamp="2026-08-23T16:49:32.218">
+    <testcase name="TestInsert" file="pir/hashing/multiple_choice_hash_table_test.cc" line="52" status="run" result="completed" time="0." timestamp="2026-08-23T16:49:32.218" classname="MultipleChoiceHashTableTest" />
+    <testcase name="TestOverflow" file="pir/hashing/multiple_choice_hash_table_test.cc" line="67" status="run" result="completed" time="0.004" timestamp="2026-08-23T16:49:32.218" classname="MultipleChoiceHashTableTest" />
+  </testsuite>
+  <testsuite name="MultipleChoiceHashTable" tests="3" failures="0" disabled="0" skipped="0" errors="0" time="0." timestamp="2026-08-23T16:49:32.223">
+    <testcase name="FailsIfNumBucketsNegative" file="pir/hashing/multiple_choice_hash_table_test.cc" line="79" status="run" result="completed" time="0." timestamp="2026-08-23T16:49:32.223" classname="MultipleChoiceHashTable" />
+    <testcase name="FailsIfNumHashFunctionsNegative" file="pir/hashing/multiple_choice_hash_table_test.cc" line="85" status="run" result="completed" time="0." timestamp="2026-08-23T16:49:32.223" classname="MultipleChoiceHashTable" />
+    <testcase name="FailsIfMaxBucketSizeNegative" file="pir/hashing/multiple_choice_hash_table_test.cc" line="91" status="run" result="completed" time="0." timestamp="2026-08-23T16:49:32.223" classname="MultipleChoiceHashTable" />
+  </testsuite>
+</testsuites>

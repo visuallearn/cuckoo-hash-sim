@@ -1,0 +1,90 @@
+/* ---------- chrome ---------- */
+.topbar {
+  display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline;
+  padding: .6rem 1rem; border-bottom: 1px solid var(--rule);
+  background: var(--bg-panel); position: sticky; top: 0; z-index: 20;
+}
+.topbar-id { display: flex; flex-direction: column; }
+.topbar-title { font-weight: 660; letter-spacing: -.01em; }
+.topbar-sub { font-family: var(--mono); font-size: .72rem; color: var(--ink-faint); }
+.topbar-nav { display: flex; flex-wrap: wrap; gap: .15rem; margin-left: auto; }
+.topbar-nav a {
+  display: flex; align-items: center; min-height: 2.5rem;
+  padding: .35rem .6rem; border-radius: var(--r); text-decoration: none;
+  color: var(--ink-soft); font-size: .875rem;
+}
+.topbar-nav a:hover { background: var(--bg-hover); color: var(--ink); }
+.topbar-nav a[aria-current="page"] {
+  background: var(--probe-soft); color: var(--probe); font-weight: 600;
+}
+
+.boot { padding: 3rem 1rem; color: var(--ink-faint); text-align: center; }
+
+.sitefoot {
+  border-top: 1px solid var(--rule); padding: 1rem;
+  color: var(--ink-soft); font-size: .8rem; max-width: 76ch;
+}
+.sitefoot .fineprint { color: var(--ink-faint); font-size: .74rem; }
+
+/* ---------- route shells ---------- */
+.route { padding: 1rem; }
+.route-prose { max-width: 74ch; padding: 1.25rem 1rem 2rem; overflow-wrap: anywhere; }
+.route-prose h2 { margin-top: 1.75rem; }
+.route-prose code, .route-prose a { overflow-wrap: anywhere; }
+
+/* ---------- the explorer grid ----------
+   Three independent columns, each its own flex stack. Not a two-row grid: with
+   rows, the tallest panel in row one pushes the working panel below the fold. */
+.ex {
+  display: grid;
+  gap: .75rem;
+  align-items: start;
+  grid-template-columns: minmax(230px, 280px) minmax(0, 1fr) minmax(340px, 440px);
+}
+.ex > * { min-width: 0; }
+.ex-col { display: flex; flex-direction: column; gap: .75rem; min-width: 0; }
+
+@media (max-width: 1240px) {
+  .ex { grid-template-columns: minmax(220px, 270px) minmax(0, 1fr); }
+  .ex-right { grid-column: 1 / -1; display: grid; gap: .75rem;
+              grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; }
+}
+@media (max-width: 900px) {
+  /* One column. `display: contents` dissolves the wrappers so each panel is a
+     grid item and can be ordered: the table first, then the working, then the
+     reference material. */
+  .ex { grid-template-columns: minmax(0, 1fr); }
+  .ex-col, .ex-right { display: contents; }
+  .p-table  { order: 1; }
+  .p-narr   { order: 2; }
+  .p-math   { order: 3; }
+  .p-rng    { order: 4; }
+  .p-config { order: 5; }
+  .p-code   { order: 6; }
+  .p-log    { order: 7; }
+  .route { padding: .5rem; }
+}
+
+/* ---------- transport ---------- */
+.transport {
+  position: sticky; bottom: 0; z-index: 15;
+  display: flex; flex-wrap: wrap; align-items: center; gap: .4rem .7rem;
+  padding: .5rem .75rem; margin-top: .75rem;
+  background: var(--bg-panel); border: 1px solid var(--rule);
+  border-radius: var(--r); box-shadow: var(--shadow);
+}
+.transport-group { display: flex; gap: .15rem; }
+.transport button { min-width: 2.4rem; text-align: center; }
+/* The primary controls are a comfortable target. The two ribbons beside them
+   are a scrubber, deliberately fine-grained, and every action they offer is
+   also on a primary button and on a key. */
+.transport .transport-group button { min-height: 2.5rem; min-width: 2.6rem; }
+.transport-count { font-family: var(--mono); font-size: .78rem; color: var(--ink-soft); white-space: nowrap; }
+
+/* ---------- panels ---------- */
+.panel {
+  background: var(--bg-panel); border: 1px solid var(--rule);
+  border-radius: var(--r); padding: var(--pad);
+}
+.panel > h4 { margin: -.1rem 0 .55rem; display: flex; align-items: baseline; gap: .5rem; flex-wrap: wrap; }
+.panel-scroll { overflow-x: auto; }

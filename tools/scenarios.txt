@@ -1,0 +1,25 @@
+# Scenarios, one per line, written by tools/mine.py.
+# tools/cxx/trace_gen.cc records each one from the real reference.
+#
+# id | structure | m | k | budget | stash | maxBucket | familySeedHex | elements | lookups | title | teaches
+#
+# A dash means the option is not set. structure is cuckoo, multiple_choice or simple.
+CK-classroom|cuckoo|6|3|4|-|-||ant,bee,cat,dog|cat,yak|Four words, six buckets|the core loop: draw, hash, place or evict
+CK-first-contact|cuckoo|4|2|6|-|-||cat,eel,hen,owl|-|One clean landing, one eviction|what an insert does when the bucket is free, and when it is not
+CK-chain|cuckoo|6|3|8|-|-||ant,bee,cat,dog,eel,fox|-|A long displacement chain|one insert can move several elements before it settles
+CK-pingpong|cuckoo|4|2|6|-|-||ant,bee,cat,eel|-|The walk goes back where it came from|a random walk is not a smart walk
+CK-stash|cuckoo|6|3|2|-|-||ant,bee,cat,dog,eel|-|The relocation budget runs out|the stash is the reference's answer to a failed walk
+CK-stash-full|cuckoo|4|2|2|1|-||ant,bee,cat,dog,eel,fox|-|The only hard failure|a bounded stash turns overflow into an error
+CK-budget-zero|cuckoo|6|3|0|-|-||ant,bee,cat|-|A budget of zero|max_relocations = 0 sends every element straight to the stash
+CK-duplicate|cuckoo|6|3|4|-|-||ant,bee,ant|ant|The same key twice|the reference has no membership test, so a key can occupy two slots
+CK-order-a|cuckoo|6|3|4|-|-||cat,dog,ant,bee|-|Four words, one order|the build is deterministic once the order is fixed
+CK-order-b|cuckoo|6|3|4|-|-||dog,cat,bee,ant|-|The same four words, another order|the same set of keys, a different table
+CK-degenerate|cuckoo|1|2|4|-|-||ant,bee|-|One bucket, two hash functions|what the validation permits, and what then happens
+CK-dense|cuckoo|8|3|8|-|-||ant,bee,cat,dog,eel,fox,gnu,hen|-|A table that is nearly full|how the walk lengthens as the load factor climbs
+CK-production|cuckoo|12|3|8|-|-||ant,bee,cat,dog,eel,fox,gnu,hen|ant,yak|The production recipe, at eight elements|k = 3, buckets = 1.5 x n, budget = n, an unlimited stash
+CK-seeded|cuckoo|12|3|8|-|-|000102030405060708090a0b0c0d0e0f|ant,bee,cat,dog,eel,fox,gnu,hen|-|The same recipe with a session seed|in production every hash function is seeded with 16 shared bytes
+CK-test-preset|cuckoo|100|3|50|3|-||Element number 0,Element number 1,Element number 2,Element number 3,Element number 4,Element number 5,Element number 6,Element number 7,Element number 8,Element number 9,Element number 10,Element number 11,Element number 12,Element number 13,Element number 14,Element number 15,Element number 16,Element number 17,Element number 18,Element number 19,Element number 20,Element number 21,Element number 22,Element number 23,Element number 24,Element number 25,Element number 26,Element number 27,Element number 28,Element number 29,Element number 30,Element number 31,Element number 32,Element number 33,Element number 34,Element number 35,Element number 36,Element number 37,Element number 38,Element number 39,Element number 40,Element number 41,Element number 42,Element number 43,Element number 44,Element number 45,Element number 46,Element number 47,Element number 48,Element number 49,Element number 50,Element number 51,Element number 52,Element number 53,Element number 54,Element number 55,Element number 56,Element number 57,Element number 58,Element number 59,Element number 60,Element number 61,Element number 62,Element number 63,Element number 64,Element number 65,Element number 66,Element number 67,Element number 68,Element number 69,Element number 70,Element number 71,Element number 72,Element number 73,Element number 74,Element number 75,Element number 76,Element number 77,Element number 78,Element number 79,Element number 80,Element number 81,Element number 82,Element number 83,Element number 84,Element number 85,Element number 86,Element number 87,Element number 88,Element number 89,Element number 90,Element number 91,Element number 92,Element number 93,Element number 94,Element number 95|-|The unit test's own parameters|the same shape at a size that no longer fits on one screen
+MC-least-loaded|multiple_choice|6|2|0|-|-||ant,bee,cat,dog,eel,fox|-|The least loaded of two buckets|d-choice hashing compares counts and never evicts
+MC-bucket-full|multiple_choice|4|2|0|-|2||ant,bee,cat,dog,eel,fox,gnu|-|Every candidate is full|the capacity failure of a bucketed table
+SH-fanout|simple|6|3|0|-|-||ant,bee,cat|-|One element, k copies|the server side of a PIR protocol stores every candidate
+SH-overflow|simple|6|2|0|-|2||ant,dog|-|A capacity test that runs twice|why the exact order of the two loops matters

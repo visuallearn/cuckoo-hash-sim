@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites tests="3" failures="0" disabled="0" errors="0" time="0." timestamp="2026-08-23T16:48:25.558" name="AllTests">
+  <testsuite name="FarmHashFunction" tests="1" failures="0" disabled="0" skipped="0" errors="0" time="0." timestamp="2026-08-23T16:48:25.558">
+    <testcase name="IsAHashFunction" file="pir/hashing/farm_hash_family_test.cc" line="31" status="run" result="completed" time="0." timestamp="2026-08-23T16:48:25.558" classname="FarmHashFunction" />
+  </testsuite>
+  <testsuite name="FarmHashFamily" tests="2" failures="0" disabled="0" skipped="0" errors="0" time="0." timestamp="2026-08-23T16:48:25.558">
+    <testcase name="IsAHashFamily" file="pir/hashing/farm_hash_family_test.cc" line="36" status="run" result="completed" time="0." timestamp="2026-08-23T16:48:25.558" classname="FarmHashFamily" />
+    <testcase name="HashesCorrectly" file="pir/hashing/farm_hash_family_test.cc" line="41" status="run" result="completed" time="0." timestamp="2026-08-23T16:48:25.558" classname="FarmHashFamily" />
+  </testsuite>
+</testsuites>

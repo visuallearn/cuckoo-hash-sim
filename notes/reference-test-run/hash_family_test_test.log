@@ -1,0 +1,16 @@
+exec ${PAGER:-/usr/bin/less} "$0" || exit 1
+Executing tests from //pir/hashing:hash_family_test
+-----------------------------------------------------------------------------
+Running main() from gmock_main.cc
+[==========] Running 2 tests from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 2 tests from HashTableTest
+[ RUN      ] HashTableTest.FailsIfNumHashFunctionsNegative
+[       OK ] HashTableTest.FailsIfNumHashFunctionsNegative (0 ms)
+[ RUN      ] HashTableTest.WrapWithSeedPrependsSeed
+[       OK ] HashTableTest.WrapWithSeedPrependsSeed (0 ms)
+[----------] 2 tests from HashTableTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 2 tests from 1 test suite ran. (0 ms total)
+[  PASSED  ] 2 tests.
