@@ -5,6 +5,7 @@ a commit, a file and a line.
 """
 from __future__ import annotations
 
+import ctypes
 import hashlib
 import json
 import os
@@ -95,6 +96,17 @@ def sh(*args: str) -> str:
         return "unknown"
 
 
+def linked_openssl(lib: str) -> str:
+    """OpenSSL_version(OPENSSL_VERSION) from the libcrypto CMake linked."""
+    try:
+        crypto = ctypes.CDLL(lib)
+        crypto.OpenSSL_version.restype = ctypes.c_char_p
+        crypto.OpenSSL_version.argtypes = [ctypes.c_int]
+        return crypto.OpenSSL_version(0).decode()
+    except Exception:
+        return "unknown"
+
+
 def copy_authored() -> None:
     """Copy the hand-written content into the generated tree."""
     for name in ("tour.json",):
@@ -151,7 +163,10 @@ def main() -> int:
         return "unknown"
 
     gcc = sh("g++", "-dumpfullversion")
-    openssl = sh("openssl", "version")
+    # Ask the library the build links, not the `openssl` first on PATH. A conda
+    # install shadows the system binary with a different version, which made the
+    # manifest name a library that never touched a trace, and differ in CI.
+    openssl = linked_openssl(cmake_setting("OPENSSL_CRYPTO_LIBRARY"))
     # Not the wall clock. Everything under docs/data/ is a function of the
     # pinned inputs, and a timestamp that moves on its own would break that:
     # two clean checkouts would produce different bytes, and the diff gate in

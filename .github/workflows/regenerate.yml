@@ -11,7 +11,9 @@ on:
 
 jobs:
   regenerate:
-    runs-on: ubuntu-latest
+    # Pinned, not ubuntu-latest: the manifest records the compiler and OpenSSL
+    # versions, so a new runner image would change docs/data/ by itself.
+    runs-on: ubuntu-24.04
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
